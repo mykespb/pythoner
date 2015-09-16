@@ -1,2 +1,3 @@
 # pythoner
-Educational, persona and professional programs in Python
+Educational, personal and professional programs in Python
+
