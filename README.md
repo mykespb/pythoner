@@ -34,11 +34,8 @@ mk-rebus4.out rebus out data
 mk-rebus.py rebus solving
 
 mk-wp1.py
-<<<<<<< HEAD
-queens1.py
-queens2.py
+
 mk-sharik.py
-=======
 
 queens1.py 8 queens, alien version 1
 
@@ -46,4 +43,3 @@ queens2.py 8 queens, alien version 2
 
 mk-max2d.py find max submatrix, w/o optimization
 
->>>>>>> 2ac5f5b616b497b9bce639be3cd8068d3cb471ca
