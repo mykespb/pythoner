@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# myke mk-sorter.py 2015-11-09 1.1
+# myke mk-sorter.py 2015-11-11 1.2
 # classic selection and bubble sortings
 
 import random
@@ -35,7 +35,8 @@ def bubsort (a):
     return a
 
 # -----------------------------------------------
-qs = bubsort
+#qs = bubsort
+qs = selsort
 
 # -----------------------------------------------
 def main ():
@@ -43,7 +44,8 @@ def main ():
 
     for i in range(TIMES):
         sa = [random.randint(-RANGE, RANGE) for e in range(SIZE)]
-        print (sa, "-->", qs (sa))
+        print (sa, end=" -> ")
+        print (qs (sa))
 
 main()
 
