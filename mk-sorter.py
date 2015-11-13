@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# myke mk-sorter.py 2015-11-11 1.2
+# myke mk-sorter.py 2015-11-13 1.3
 # classic selection and bubble sortings
 
 import random
@@ -50,3 +50,4 @@ def main ():
 main()
 
 # ===============================================
+
