@@ -1,4 +1,5 @@
-# myke pil-primes1.py 2010-09-14 2010-09-15 0.2
+#!/usr/bin/python2
+# myke pil-primes1.py 2010-09-14 2010-09-15 1.1
 # draw prime numbers to bmp file
 
 from PIL import Image
