@@ -37,11 +37,15 @@ def proc (n):
 
         if steps < MAXPRINT:
             print ("Reversed:           ", obr)
+        else:
+            print (".", end="")
         n = str (int (n) + int (obr))
         if steps < MAXPRINT:
             print ("Next {0:10}:     {1}" . format (steps, n))
+        else:
+            print (".", end="")
 
-    print ("Alas, MAX ({}) is achieved" . format(MAX))
+    print ("\nAlas, MAX ({}) is achieved" . format(MAX))
     return 0
 
 def main(args):
