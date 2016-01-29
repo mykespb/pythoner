@@ -1,7 +1,7 @@
 #!/usr/bin/env python2
 # -*- coding: utf-8 -*-
 #
-# 2014-04-15 2016-01-29 5.1. simpel test
+# 2014-04-15 2016-01-29 5.1.0. simpel test
 
 #from __future__ import division, print_function
 #import sqlite3 as sql
