@@ -1,5 +1,5 @@
 # pythoner
-Educational, personal and professional programs in Python
+## Educational, personal and professional programs in Python
 
 mk-chess960.py random ititial figure's setting for Fiherandom
 
