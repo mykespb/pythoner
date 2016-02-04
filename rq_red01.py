@@ -2,7 +2,7 @@
 # Mikhail (myke) Kolodin
 # testign redis and redis-queue (rq)
 # from http://python-rq.org/ etc
-# 2016-02-04 2016-02-04 1.1
+# 2016-02-04 2016-02-05 1.3
 
 import redis
 import requests
@@ -35,3 +35,11 @@ result = q.enqueue (count_words_at_url, 'http://nvie.com')
 #~ def count_words_at_url(url):
     #~ resp = requests.get(url)
     #~ return len(resp.text.split())
+
+# in parallel, the worker runs:
+
+#~ $ rq worker
+#~ *** Listening for work on default
+#~ Got count_words_at_url('http://nvie.com') from default
+#~ Job result = 818
+#~ *** Listening for work on default
