@@ -1,0 +1,36 @@
+#!/usr/bin/env python3
+# Mikhail (myke) Kolodin
+# testign redis and redis-queue (rq)
+# 2016-02-04 2016-02-04 1.1
+
+import redis
+import requests
+from redis import Redis
+from rq import Queue
+
+# test redis itfself
+
+r = redis.StrictRedis(host='localhost', port=6379, db=0)
+r.set('foo', 'bar')
+x = r.get('foo')
+print (x)
+
+q = Queue(connection=Redis())
+
+from my_module import count_words_at_url
+result = q.enqueue (count_words_at_url, 'http://nvie.com')
+
+
+# my_module.py is:
+
+#~ #!/usr/bin/env python3
+
+#~ import requests
+#~ from redis import Redis
+#~ from rq import Queue
+
+#~ # test redis queue (rq))
+
+#~ def count_words_at_url(url):
+    #~ resp = requests.get(url)
+    #~ return len(resp.text.split())
