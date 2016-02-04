@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 # Mikhail (myke) Kolodin
 # testign redis and redis-queue (rq)
+# from http://python-rq.org/ etc
 # 2016-02-04 2016-02-04 1.1
 
 import redis
