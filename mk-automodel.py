@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# mk-automodel.py py3 2016-03-05 2016-03-05 0.1
+# mk-automodel.py py3 2016-03-05 2016-03-05 0.2
 # Ch.Wetherel modeling of autostrada
 
 import random, time
 
-TIMES = 3  # seconds to simulate
+TIMES = 13  # seconds to simulate
 
 class Car():
     """ main car class """
