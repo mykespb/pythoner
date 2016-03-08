@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# mk-automodel.py py3 2016-03-05 2016-03-08 0.3
+# mk-automodel.py py3 2016-03-05 2016-03-09 0.4
 # Ch.Wetherel modeling of autostrada
 
 import random, time
 
-TIMES = 20  # seconds to simulate
+TIMES = 50      # seconds to simulate
+PAUSE = 0.1     # viewer speed
 
 class Car():
     """ main car class """
@@ -13,8 +14,6 @@ class Car():
     def __init__(self):
         self.pos = 0
         self.velo = 1.0
-        self.state = 1
-        # 0= out, 1=norm, -1=crash
 
     def show(self):
         """ show this car """
@@ -30,6 +29,7 @@ class Way():
         self.leng = leng
         self.sec  = 0
         self.cars = []
+        self.dist = 1
 
     @property
     def miles (self):
@@ -46,8 +46,7 @@ class Way():
         out = "-" * self.leng
         for car in self.cars:
             pos = int(car.pos)
-            if pos:
-                out = out[:pos] + "X" + out[pos:]
+            out = out[:pos] + "+" + out[pos+1:]
         print ("%5d %s" % (self.sec, out))
 
     def step (self):
@@ -60,15 +59,24 @@ class Way():
     def gencars (self):
         """ generate new car ramdomly """
         if random.random() < self.prob:
-            self.cars += [Car()]
-            #print ("!", end="")
-        #else:
-            #print (" ", end="")
+            self.cars = [Car()] + self.cars
 
     def movecars (self):
         """ move cars to next position """
-        for car in self.cars:
-            car.pos += car.velo
+        for carnum in range(self.line):
+            car      = self.cars [carnum]
+            delta    = 0.8 + 0.4 * random.random()
+            car.velo *= delta
+            if carnum < self.line-1:
+                distance = self.cars [carnum+1] .pos - car.pos
+                #print ("dist=%f" % distance)
+                if distance < 0.01:         # crash!
+                    car.velo *= 0.2
+                    self.cars [carnum+1] .velo *= 0.2
+                elif distance < self.dist:   # slow down!
+                    car.velo *= 0.5
+                    self.cars [carnum+1] .velo *= 1.5
+            car.pos  += car.velo
         exited = [car for car in self.cars if car.pos >= self.miles]
         for car in exited:
             del car
@@ -81,7 +89,7 @@ def main(args):
 
     for atime in range(TIMES):
         way.step()
-        time.sleep(1)
+        time.sleep(PAUSE)
 
     print ("\n\nend simulation\n\n")
     return 0
