@@ -1,12 +1,13 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# mk-rot.py 2016-03-11 2016-03-11 1ю0
+# mk-rot.py 2016-03-11 2016-03-11 1.1
 # rot cypher, for English & Russian, auto
+# w/o Ёё, OK
 
 latbig   = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 latsmall = "abcdefghijklmnopqrstuvwxyz"
-rusbig   = "АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ"
-russmall = "абвгдеёжзийклмнопрстуфхцчшщъыьэюя"
+rusbig   = "АБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ"
+russmall = "абвгдежзийклмнопрстуфхцчшщъыьэюя"
 
 text = "hello to all всем привет И ТАК ПОБЕДИМ AND THIS WAY"
 
@@ -20,10 +21,11 @@ def rot (t):
     """ rotate text """
     r = ""
     for c in t:
-        r += (alf (c, latbig) or
+        r += (
               alf (c, latsmall) or
-              alf (c, rusbig) or
+              alf (c, latbig) or
               alf (c, russmall) or
+              alf (c, rusbig) or
              c)
     return r
 
