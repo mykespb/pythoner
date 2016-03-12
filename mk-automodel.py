@@ -6,7 +6,7 @@
 import random, time
 
 TIMES = 50      # seconds to simulate
-PAUSE = 0.05     # viewer speed
+PAUSE = 0.01     # viewer speed
 
 class Car():
     """ main car class """
