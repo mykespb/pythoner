@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# mk-automodel.py py3 2016-03-05 2016-03-10 0.5
+# mk-automodel.py py3 2016-03-05 2016-03-13 0.6
 # Ch.Wetherel modeling of autostrada
 
 import random, time
@@ -65,12 +65,12 @@ class Way():
         """ move cars to next position """
         for carnum in range(self.line):
             car      = self.cars [carnum]
-            delta    = 0.8 + 0.4 * random.random()
+            delta    = 0.7 + 0.6 * random.random()
             car.velo *= delta
             if carnum < self.line-1:
                 distance = self.cars [carnum+1] .pos - car.pos
                 #print ("dist=%f" % distance)
-                if distance < 0.01:         # crash!
+                if distance < 0.1:         # crash!
                     car.velo *= 0.2
                     self.cars [carnum+1] .velo *= 0.2
                 elif distance < self.dist:   # slow down!
