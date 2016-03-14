@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# mk-automodel.py py3 2016-03-05 2016-03-13 0.6
+# mk-automodel.py py3 2016-03-05 2016-03-14 0.7
 # Ch.Wetherel modeling of autostrada
 
 import random, time
 
 TIMES = 50      # seconds to simulate
-PAUSE = 0.01     # viewer speed
+PAUSE = 0.001     # viewer speed
 
 class Car():
     """ main car class """
@@ -14,6 +14,7 @@ class Car():
     def __init__(self):
         self.pos = 0
         self.velo = 1.0
+        self.status = 1
 
     def show(self):
         """ show this car """
@@ -67,20 +68,25 @@ class Way():
             car      = self.cars [carnum]
             delta    = 0.7 + 0.6 * random.random()
             car.velo *= delta
+
             if carnum < self.line-1:
                 distance = self.cars [carnum+1] .pos - car.pos
                 #print ("dist=%f" % distance)
                 if distance < 0.1:         # crash!
-                    car.velo *= 0.2
-                    self.cars [carnum+1] .velo *= 0.2
+                    #~ car.velo *= 0.2
+                    #~ self.cars [carnum+1] .velo *= 0.2
+                    self.cars [carnum] .status = 0
                 elif distance < self.dist:   # slow down!
                     car.velo *= 0.5
                     self.cars [carnum+1] .velo *= 1.5
             car.pos  += car.velo
-        exited = [car for car in self.cars if car.pos >= self.miles]
+
+        # who passed out of the way
+        exited = [car for car in self.cars if car.pos >= self.miles or car.status == 0]
         for car in exited:
             del car
-        self.cars = [car for car in self.cars if car.pos < self.miles]
+
+        self.cars = [car for car in self.cars if car.pos < self.miles and car.status==1]
 
 def main(args):
     print ("start simulation\n\n")
