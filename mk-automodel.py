@@ -5,7 +5,7 @@
 
 import random, time
 
-TIMES = 50      # seconds to simulate
+TIMES = 350      # seconds to simulate
 PAUSE = 0.001     # viewer speed
 
 class Car():
@@ -23,7 +23,7 @@ class Car():
 class Way():
     """ the autoroute """
 
-    MILES = 50
+    MILES = 100
 
     def __init__(self, prob=0.1, leng=MILES):
         self.prob = prob
