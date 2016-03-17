@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# mk-automodel.py py3 2016-03-05 2016-03-17 0.7
+# mk-automodel.py py3 2016-03-05 2016-03-18 0.8
 # Ch.Wetherel modeling of autostrada
 
 import random, time
@@ -48,7 +48,7 @@ class Way():
         for car in self.cars:
             pos = int(car.pos)
             out = out[:pos] + "+" + out[pos+1:]
-        print ("%5d %s" % (self.sec, out))
+        print ("%5d (%03d) %s" % (self.sec, len(self.cars), out))
 
     def step (self):
         """ make iteration step of simulation """
