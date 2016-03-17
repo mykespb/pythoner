@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# mk-automodel.py py3 2016-03-05 2016-03-14 0.7
+# mk-automodel.py py3 2016-03-05 2016-03-17 0.7
 # Ch.Wetherel modeling of autostrada
 
 import random, time
 
-TIMES = 350      # seconds to simulate
+TIMES = 300      # seconds to simulate
 PAUSE = 0.001     # viewer speed
 
 class Car():
@@ -70,15 +70,16 @@ class Way():
             car.velo *= delta
 
             if carnum < self.line-1:
-                distance = self.cars [carnum+1] .pos - car.pos
+                distance = self.cars [carnum+1] .pos - car.pos - car.velo
                 #print ("dist=%f" % distance)
-                if distance < 0.1:         # crash!
+                if distance < 0:         # crash!
                     #~ car.velo *= 0.2
                     #~ self.cars [carnum+1] .velo *= 0.2
                     self.cars [carnum] .status = 0
                 elif distance < self.dist:   # slow down!
-                    car.velo *= 0.5
-                    self.cars [carnum+1] .velo *= 1.5
+                    car.velo *= 0.4
+                    self.cars [carnum+1] .velo *= 1.3
+
             car.pos  += car.velo
 
         # who passed out of the way
