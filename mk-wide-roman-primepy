@@ -1,0 +1,71 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+#  https://habrahabr.ru/post/280179/
+# Самое широкое простое число, записанное римскими цифрами
+# Один из моих любимых развлекательных твиттеров – это @wacnt. Там появляются вопросы, на которые не может ответить математический поисковик Wolfram|Alpha. На некоторые, кстати, мне сумел дать ответ виртуальный ассистент Facebook M.
+#
+# Вот штучка из недавних, которая заставила меня улыбнуться:
+# простое число, не большее 4000, получающееся самым широким при записи римскими цифрами шрифтом Times New Roman
+
+# решаем пока без шрифта и простоты
+
+MAX = 4000
+
+def roman(i):
+    """ перевести число из арабской записи в римскую """
+    out = ""
+    if i == 0: return "0"
+    if i < 0:
+        i = -i
+        out = "-"
+
+    # IVXLCDM
+    para = ((1000, "M"), (900, "CM"), (500, "D"), (400, "CD"), (100, "C"), (90, "XC"), (50, "L"), (40, "XL"), (10, "X"), (9, "IX"), (5, "V"), (4, "IV"), (1, "I"))
+
+    while i > 0:
+        for p in para:
+            if i >= p[0]:
+                i -= p[0]
+                out += p[1]
+                break
+
+    return out
+
+
+def main(args):
+    """ перебор и выбор длиннейшего с печатью """
+    maxri = 0
+    maxlri = 1
+    for i in range(1, MAX+1):
+        ri = roman(i)
+        lri = len(ri)
+        yes = ""
+        if lri > maxlri:
+            maxlri = lri
+            maxri = ri
+            yes = "yes!"
+        print (i, ri, lri, yes)
+
+    print ("\nрезультат: длиннейшее римское число {} с длиной {}" .format(maxri, maxlri))
+
+    return 0
+
+if __name__ == '__main__':
+    import sys
+    sys.exit(main(sys.argv))
+
+#~ 3988 MMMCMLXXXVIII 13
+#~ 3989 MMMCMLXXXIX 11
+#~ 3990 MMMCMXC 7
+#~ 3991 MMMCMXCI 8
+#~ 3992 MMMCMXCII 9
+#~ 3993 MMMCMXCIII 10
+#~ 3994 MMMCMXCIV 9
+#~ 3995 MMMCMXCV 8
+#~ 3996 MMMCMXCVI 9
+#~ 3997 MMMCMXCVII 10
+#~ 3998 MMMCMXCVIII 11
+#~ 3999 MMMCMXCIX 9
+#~ 4000 MMMM 4
+
+#~ результат: длиннейшее римское число MMMDCCCLXXXVIII с длиной 15
