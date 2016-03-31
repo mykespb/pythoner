@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 # mtm = myke's 'time manager
-# 2016-03-31 1.6
+# 2016-03-31 1.9
 
 # use:
 # mkm <cmd> params
-# writes to file $MTM (or mtm.log in current dir if $MTM is absent):
+# writes to file $MTM (or ./mtm.log in current dir if $MTM is absent):
 #     dt args
 # commands: on off slept gone back stat
 # see full docs below
@@ -13,18 +13,18 @@
 # maybe electron/ nw.js versioon will be added
 # text stats + graph reports to be done
 
-import sys, datetime
+import sys, datetime, os
 
-version = "0.1"
-fout = '~/bin/mtm.log'
+version = "1.8"
+fout = os.getenv('MTM', os.getcwd() + '/mtm.log')
 
 dt = str(datetime.datetime.now())[:-7]
 
-cmdlist = "? help on off out bed slept read tv inet chat busy prog ate study watch tea away stat report".split()
+cmdlist = "? help on off out up down home bed slept read tv inet chat busy prog ate study watch tea away stat report".split()
 
 def main(args):
     print ("This is MTM myke's Time Management routine ver. {}" .format (version))
-    #~ print (dt, sys.argv)
+    #~ print (dt, sys.argv, fout)
 
     if len(sys.argv) > 1 and sys.argv[1] in cmdlist:
         if sys.argv[1] == "?":
