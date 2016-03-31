@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 # mtm = myke's 'time manager
-# 2016-03-31 1.14
+# 2016-03-31 1.15
 
 # use:
 # mkm <cmd> params
@@ -15,7 +15,7 @@
 
 import sys, datetime, os, pprint
 
-version = "1.14"
+version = "1.15"
 
 dt = str(datetime.datetime.now())[:-7]
 dtdir = dt[:10]
