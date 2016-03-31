@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 # mtm = myke's 'time manager
-# 2016-03-31 1.3
+# 2016-03-31 1.4
 
 # use:
 # mkm <cmd> params
@@ -19,7 +19,7 @@ version = "0.1"
 
 dt = str(datetime.datetime.now())[:-7]
 
-cmdlist = "? help on off out bed slept read tv busy prog ate tea away stat report".split()
+cmdlist = "? help on off out bed slept read tv busy prog ate study watch tea away stat report".split()
 
 def main(args):
     print ("This is MTM myke's Time Management routine ver. {}" .format (version))
