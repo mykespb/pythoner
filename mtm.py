@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 # mtm = myke's 'time manager
-# 2016-03-31 1.13
+# 2016-03-31 1.14
 
 # use:
 # mkm <cmd> params
@@ -15,11 +15,11 @@
 
 import sys, datetime, os, pprint
 
-version = "1.11"
+version = "1.14"
 
 dt = str(datetime.datetime.now())[:-7]
 dtdir = dt[:10]
-fout = os.getenv('MTM', os.getcwd()) + "/" + dtdir + '.log'
+fout = os.getenv('MTM', os.getcwd()) + "/mtm-" + dtdir + '.log'
 
 grocc = {
     "status":     "on off out away".split(),
