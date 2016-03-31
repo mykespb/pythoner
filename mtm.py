@@ -15,7 +15,7 @@
 
 import sys, datetime, os, pprint
 
-version = "1.10"
+version = "1.11"
 fout = os.getenv('MTM', os.getcwd() + '/mtm.log')
 
 dt = str(datetime.datetime.now())[:-7]
