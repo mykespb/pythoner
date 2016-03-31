@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 # mtm = myke's 'time manager
-# 2016-03-31 1.4
+# 2016-03-31 1.6
 
 # use:
 # mkm <cmd> params
@@ -16,10 +16,11 @@
 import sys, datetime
 
 version = "0.1"
+fout = '~/bin/mtm.log'
 
 dt = str(datetime.datetime.now())[:-7]
 
-cmdlist = "? help on off out bed slept read tv busy prog ate study watch tea away stat report".split()
+cmdlist = "? help on off out bed slept read tv inet chat busy prog ate study watch tea away stat report".split()
 
 def main(args):
     print ("This is MTM myke's Time Management routine ver. {}" .format (version))
@@ -29,7 +30,6 @@ def main(args):
         if sys.argv[1] == "?":
             sys.argv[1] = "help"
         print (dt, *sys.argv[1:])
-        fout = 'mtm.log'
         with open (fout, 'a') as mtm:
             print (dt, *sys.argv[1:], file=mtm)
     else:
