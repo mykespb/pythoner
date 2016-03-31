@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 # mtm = myke's 'time manager
-# 2016-03-31 1.12
+# 2016-03-31 1.13
 
 # use:
 # mkm <cmd> params
@@ -21,8 +21,6 @@ dt = str(datetime.datetime.now())[:-7]
 dtdir = dt[:10]
 fout = os.getenv('MTM', os.getcwd()) + "/" + dtdir + '.log'
 
-print ("fout=", fout)
-
 grocc = {
     "status":     "on off out away".split(),
     "state":      "up down".split(),
@@ -41,6 +39,7 @@ occs.sort()
 
 def main(args):
     print ("This is MTM myke's Time Management routine ver. {}" .format (version))
+    print ("Log goes to", fout)
     #~ print (dt, sys.argv, fout)
 
     if len(sys.argv) > 1 and sys.argv[1] in occs:
