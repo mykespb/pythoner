@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 # mtm = myke's 'time manager
-# 2016-03-31 1.15
+# 2016-03-31 1.16
 
 # use:
 # mkm <cmd> params
@@ -15,7 +15,7 @@
 
 import sys, datetime, os, pprint
 
-version = "1.15"
+version = "1.16"
 
 dt = str(datetime.datetime.now())[:-7]
 dtdir = dt[:10]
@@ -24,9 +24,9 @@ fout = os.getenv('MTM', os.getcwd()) + "/mtm-" + dtdir + '.log'
 grocc = {
     "status":     "on off out away".split(),
     "state":      "up down".split(),
-    "busy":       "busy prog study".split(),
+    "busy":       "busy work prog study comm".split(),
     "home":       "home life eat tea child".split(),
-    "rest":       "walk bed sleep chat fun tv inet watch".split(),
+    "rest":       "bards art read write walk bed sleep chat fun tv inet watch".split(),
     "active":     "travel sport".split(),
     "result":     "stat report".split(),
     "info":       "? help".split()
