@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 # mtm = myke's 'time manager
-# 2016-04-01 1.19
+# 2016-04-01 1.20
 
 # use:
 # mkm <cmd> params
@@ -15,7 +15,7 @@
 
 import sys, datetime, os, pprint
 
-version = "2016-04-01 1.19"
+version = "2016-04-01 1.20"
 
 dt = str(datetime.datetime.now())[:-7]
 dtdir = dt[:7]  # just YYYY-MM
@@ -24,14 +24,14 @@ fout = os.getenv('MTM', os.getcwd()) + "/mtm-" + dtdir + '.log'
 grocc = {
     "status":     "on off out away with at" .split(),
     "state":      "up down ill well" .split(),
-    "busy":       "busy work prog study comm" .split(),
-    "home":       "home life child" .split(),
-    "art":        "art book bards museum" .split(),
+    "busy":       "busy meet work prog study comm" .split(),
+    "home":       "home life talk build child wash clean self" .split(),
+    "arts":       "art book bards museum cinema theater" .split(),
     "rest":       "eat tea coffee drink read write walk bed sleep" .split(),
-    "ext":        "chat fun tv inet watch" .split(),
+    "exter":      "chat fun tv inet watch" .split(),
     "active":     "travel sport" .split(),
     "result":     "stat report" .split(),
-    "info":       "? help query" .split()
+    "info":       "? help query log last" .split()
 }
 
 occs = []
@@ -45,11 +45,40 @@ def main(args):
     #~ print (dt, sys.argv, fout)
 
     if len(sys.argv) > 1 and sys.argv[1] in occs:
+
         if sys.argv[1] == "?":
             sys.argv[1] = "help"
+
+        cmd = sys.argv[1]
+
+        # print entire file
+        if cmd == "log":
+            with open (fout) as flog:
+                txt = flog.read()
+                print (txt)
+            return
+
+        # print last lines
+        if cmd == "last":
+            amt = 10
+            try:
+                if len(sys.argv) == 3:
+                    amt = int(sys.argv[2])
+            except:
+                amt = 10
+            with open (fout) as flog:
+                txt = flog.readlines()
+            print ("showing {} last lines" .format(amt))
+            for lino in txt[-amt:]:
+                print (lino, end="")
+            return
+
+        # perform log record
         print (dt, *sys.argv[1:])
+
         with open (fout, 'a') as mtm:
             print (dt, *sys.argv[1:], file=mtm)
+
     else:
         print ("available commands are:")
         pprint.pprint (grocc)
