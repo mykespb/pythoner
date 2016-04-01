@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 # mtm = myke's 'time manager
-# 2016-04-01 1.20
+# 2016-04-02 1.21
 
 # use:
 # mkm <cmd> params
@@ -15,12 +15,13 @@
 
 import sys, datetime, os, pprint
 
-version = "2016-04-01 1.20"
+version = "2016-04-21 1.21"
 
 dt = str(datetime.datetime.now())[:-7]
 dtdir = dt[:7]  # just YYYY-MM
 fout = os.getenv('MTM', os.getcwd()) + "/mtm-" + dtdir + '.log'
 
+# categories and keywords
 grocc = {
     "status":     "on off out away with at" .split(),
     "state":      "up down ill well" .split(),
@@ -38,6 +39,9 @@ occs = []
 for x in grocc.values():
     occs.extend(x)
 occs.sort()
+
+# how we print them when in text mode; others aren't printed or are shown in other way
+todisplay = {"busy": "b", "home": "h", "arts": "a", "rest": "r", "exter": "x", "active": "v"}
 
 def main(args):
     print ("This is MTM myke's Time Management routine ver. {}" .format (version))
@@ -80,6 +84,7 @@ def main(args):
             print (dt, *sys.argv[1:], file=mtm)
 
     else:
+        # default output w/o parameters
         print ("available commands are:")
         pprint.pprint (grocc)
 
