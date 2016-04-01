@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 # mtm = myke's 'time manager
-# 2016-03-31 1.17
+# 2016-03-31 1.18
 
 # use:
 # mkm <cmd> params
@@ -15,21 +15,23 @@
 
 import sys, datetime, os, pprint
 
-version = "1.17"
+version = "1.18"
 
 dt = str(datetime.datetime.now())[:-7]
 dtdir = dt[:7]  # just YYYY-MM
 fout = os.getenv('MTM', os.getcwd()) + "/mtm-" + dtdir + '.log'
 
 grocc = {
-    "status":     "on off out away".split(),
-    "state":      "up down".split(),
-    "busy":       "busy work prog study comm".split(),
-    "home":       "home life eat tea child".split(),
-    "rest":       "bards art read write walk bed sleep chat fun tv inet watch".split(),
-    "active":     "travel sport".split(),
-    "result":     "stat report".split(),
-    "info":       "? help".split()
+    "status":     "on off out away" .split(),
+    "state":      "up down" .split(),
+    "busy":       "busy work prog study comm" .split(),
+    "home":       "home life child" .split(),
+    "art":        "art book bards museum" .split(),
+    "rest":       "eat tea coffee drink read write walk bed sleep" .split(),
+    "ext":        "chat fun tv inet watch" .split(),
+    "active":     "travel sport" .split(),
+    "result":     "stat report" .split(),
+    "info":       "? help query" .split()
 }
 
 occs = []
