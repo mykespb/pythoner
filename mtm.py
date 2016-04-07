@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 # mtm = myke's 'time manager
-# 2016-04-02 1.21
+# 2016-04-08 1.22
 
 # use:
 # mkm <cmd> params
@@ -15,11 +15,13 @@
 
 import sys, datetime, os, pprint
 
-version = "2016-04-21 1.21"
+version = "2016-04-08 1.22"
 
 dt = str(datetime.datetime.now())[:-7]
 dtdir = dt[:7]  # just YYYY-MM
 fout = os.getenv('MTM', os.getcwd()) + "/mtm-" + dtdir + '.log'
+
+LASTS = 20  # lines to show by 'last' command
 
 # categories and keywords
 grocc = {
@@ -64,7 +66,7 @@ def main(args):
 
         # print last lines
         if cmd == "last":
-            amt = 10
+            amt = LASTS
             try:
                 if len(sys.argv) == 3:
                     amt = int(sys.argv[2])
