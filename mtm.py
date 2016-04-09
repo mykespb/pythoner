@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 # mtm = myke's 'time manager
-# 2016-04-08 1.22
+# 2016-04-09 1.23
 
 # use:
 # mkm <cmd> params
@@ -13,9 +13,10 @@
 # maybe electron/ nw.js versioon will be added
 # text stats + graph reports to be done
 
-import sys, datetime, os, pprint
+import sys, datetime, os
+# pprint
 
-version = "2016-04-08 1.22"
+version = "2016-04-09 1.23"
 
 dt = str(datetime.datetime.now())[:-7]
 dtdir = dt[:7]  # just YYYY-MM
@@ -45,7 +46,21 @@ occs.sort()
 # how we print them when in text mode; others aren't printed or are shown in other way
 todisplay = {"busy": "b", "home": "h", "arts": "a", "rest": "r", "exter": "x", "active": "v"}
 
+def help():
+    """ print list of options """
+    loks = sorted(grocc.keys())
+    for ok in loks:
+        print (ok, end="")
+        tou = 0
+        for ov in sorted(grocc[ok]):
+            tou += 1
+            if tou % 10 == 1:
+                print ("\n\t", end="")
+            print (ov + ", ", end="")
+        print ()
+
 def main(args):
+    """ main routine """
     print ("This is MTM myke's Time Management routine ver. {}" .format (version))
     print ("Log goes to", fout)
     #~ print (dt, sys.argv, fout)
@@ -88,7 +103,8 @@ def main(args):
     else:
         # default output w/o parameters
         print ("available commands are:")
-        pprint.pprint (grocc)
+        #~ pprint.pprint (grocc)
+        help()
 
     return 0
 
