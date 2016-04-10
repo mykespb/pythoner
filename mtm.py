@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 # mtm = myke's 'time manager
-# 2016-04-09 1.23
+# 2016-04-10 1.24
 
 # use:
 # mkm <cmd> params
@@ -16,7 +16,7 @@
 import sys, datetime, os
 # pprint
 
-version = "2016-04-09 1.23"
+version = "2016-04-10 1.24"
 
 dt = str(datetime.datetime.now())[:-7]
 dtdir = dt[:7]  # just YYYY-MM
@@ -29,8 +29,8 @@ grocc = {
     "status":     "on off out away with at" .split(),
     "state":      "up down ill well" .split(),
     "busy":       "busy meet work prog study comm" .split(),
-    "home":       "home life talk build child wash clean self" .split(),
-    "arts":       "art book bards museum cinema theater" .split(),
+    "home":       "home shop life talk build child wash clean self doctor" .split(),
+    "arts":       "art book bards concert museum cinema theater" .split(),
     "rest":       "eat tea coffee drink read write walk bed sleep" .split(),
     "exter":      "chat fun tv inet watch" .split(),
     "active":     "travel sport" .split(),
@@ -50,7 +50,7 @@ def help():
     """ print list of options """
     loks = sorted(grocc.keys())
     for ok in loks:
-        print (ok, end="")
+        print (ok + ":", end="")
         tou = 0
         for ov in sorted(grocc[ok]):
             tou += 1
