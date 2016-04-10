@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 # mtm = myke's 'time manager
-# 2016-04-11 1.25
+# 2016-04-11 1.26
 
 # use:
 # mkm <cmd> params
@@ -16,7 +16,7 @@
 import sys, datetime, os
 # pprint
 
-version = "2016-04-11 1.25"
+version = "2016-04-11 1.26"
 
 dt = str(datetime.datetime.now())[:-7]
 dtdir = dt[:7]  # just YYYY-MM
@@ -28,7 +28,7 @@ LASTS = 20  # lines to show by 'last' command
 grocc = {
     "status":     "on off out away with at" .split(),
     "state":      "up down ill well" .split(),
-    "busy":       "busy meet work prog study comm" .split(),
+    "busy":       "busy meet conf work prog study trans" .split(),
     "home":       "home shop life talk build child wash clean self doctor" .split(),
     "arts":       "art book bards concert museum cinema theater" .split(),
     "rest":       "eat tea coffee drink read write walk bed sleep" .split(),
