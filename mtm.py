@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 # mtm = myke's 'time manager
-# 2016-04-11 1.31
+# 2016-04-15 1.32
 
 # use:
 # mkm <cmd> params
@@ -13,10 +13,10 @@
 # maybe electron/ nw.js versioon will be added
 # text stats + graph reports to be done
 
-import sys, datetime, os
+import sys, datetime, os, collections
 # pprint
 
-version = "2016-04-11 1.31"
+version = "2016-04-15 1.32"
 
 dt = str(datetime.datetime.now())[:-7]
 dtdir = dt[:7]  # just YYYY-MM
@@ -77,6 +77,18 @@ def main(args):
             with open (fout) as flog:
                 txt = flog.read()
                 print (txt)
+            return
+
+        # count stats from entire file
+        if cmd == "stat":
+            cm = collections.Counter()
+            with open (fout) as flog:
+                for line in flog:
+                    dm = line[:10]
+                    cm [dm] += 1
+            print ("data for last month")
+            for dm in sorted(cm):
+                print ("{0}: {1:3d}" .format (dm , cm[dm]))
             return
 
         # print last lines
