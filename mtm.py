@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 # mtm = myke's 'time manager
-# 2016-04-19 1.36
+# 2016-04-25 1.37
 
 # use:
 # mkm <cmd> params
@@ -16,7 +16,7 @@
 import sys, datetime, os, collections
 # pprint
 
-version = "2016-04-19 1.36"
+version = "2016-04-25 1.37"
 
 dt = str(datetime.datetime.now())[:-7]
 dtdir = dt[:7]  # just YYYY-MM
@@ -37,6 +37,9 @@ grocc = {
     "result":     "stat report" .split(),
     "info":       "? help query log last" .split()
 }
+
+cutup   = "busy active hime arts".split()
+cutdown = "rest exter".split()
 
 occs = []
 for x in grocc.values():
