@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 # mtm = myke's 'time manager
-# 2016-04-25 1.37
+# 2016-04-26 1.38
 
 # use:
 # mkm <cmd> params
@@ -16,7 +16,7 @@
 import sys, datetime, os, collections
 # pprint
 
-version = "2016-04-25 1.37"
+version = "2016-04-26 1.38"
 
 dt = str(datetime.datetime.now())[:-7]
 dtdir = dt[:7]  # just YYYY-MM
@@ -84,14 +84,46 @@ def main(args):
 
         # count stats from entire file
         if cmd == "stat":
+
             cm = collections.Counter()
             with open (fout) as flog:
                 for line in flog:
                     dm = line[:10]
                     cm [dm] += 1
+
+            if len(cm) == 0:
+                return
+
             print ("data for last month")
-            for dm in sorted(cm):
-                print ("{0}: {1:3d}" .format (dm , cm[dm]))
+
+            if "hor" in sys.argv:
+                vmax = max(cm.values())
+                #~ print ("max=", vmax)
+                TOP = 20
+                norma = 1. * TOP / vmax
+                lok = sorted(list(cm))
+                prep = lok[0][:8]
+                #~ print ("norma=", norma, "prep=", prep, "lok=", lok)
+                for h in range(TOP, 0, -1):
+                    hlim = h * norma
+                    #~ print (hlim)
+                    for k in lok:
+                        v = cm[k]
+                        if v*norma/2. >= hlim:
+                            print ("  *", end="")
+                        else:
+                            print ("   ", end="")
+                    print()
+                for s in lok:
+                    print ("", s[-2:], end="")
+                print ()
+                for s in lok:
+                    print ("%3d" % cm[s], end="")
+                print ()
+
+            else:
+                for dm in sorted(cm):
+                    print ("{0}: {1:3d}" .format (dm , cm[dm]))
             return
 
         # print last lines
