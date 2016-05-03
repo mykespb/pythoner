@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 # mtm = myke's 'time manager
-# 2016-04-26 1.39
+# 2016-05-03 1.40
 
 # use:
 # mkm <cmd> params
@@ -16,7 +16,7 @@
 import sys, datetime, os, collections
 # pprint
 
-version = "2016-04-26 1.39"
+version = "2016-05-03 1.40"
 
 dt = str(datetime.datetime.now())[:-7]
 dtdir = dt[:7]  # just YYYY-MM
@@ -94,7 +94,7 @@ def main(args):
             if len(cm) == 0:
                 return
 
-            print ("data for last month")
+            print ("data for this month")
 
             if "hor" in sys.argv:
                 vmax = max(cm.values())
