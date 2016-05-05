@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 # mtm = myke's 'time manager
-# 2016-05-05 1.41
+# 2016-05-05 1.42
 
 # use:
 # mkm <cmd> params
@@ -16,7 +16,7 @@
 import sys, datetime, os, collections
 # pprint
 
-version = "2016-05-05 1.41"
+version = "2016-05-05 1.42"
 
 dt = str(datetime.datetime.now())[:-7]
 dtdir = dt[:7]  # just YYYY-MM
@@ -29,11 +29,11 @@ grocc = {
     "status":     "on off out away with at" .split(),
     "state":      "up down ill well" .split(),
     "busy":       "plan busy meet money conf work prog study trans" .split(),
-    "home":       "home shop tax game life talk build child wash clean self doctor" .split(),
+    "home":       "home shop tax game life talk build child wash clean self doctor think" .split(),
     "arts":       "art book lang bards concert museum cinema theater" .split(),
     "rest":       "eat tea coffee drink read write walk bed sleep" .split(),
     "exter":      "chat fun tv inet watch demo city" .split(),
-    "active":     "travel sport ski byke run hike boat drive ride" .split(),
+    "active":     "travel sport ski byke run hike boat drive ride astop" .split(),
     "result":     "stat log last report" .split(),
     "info":       "? help query" .split()
 }
