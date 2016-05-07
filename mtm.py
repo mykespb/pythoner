@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 # mtm = myke's 'time manager
-# 2016-05-05 1.42
+# 2016-05-07 1.43
 
 # use:
 # mkm <cmd> params
@@ -16,13 +16,13 @@
 import sys, datetime, os, collections
 # pprint
 
-version = "2016-05-05 1.42"
+version = "2016-05-07 1.43"
 
 dt = str(datetime.datetime.now())[:-7]
 dtdir = dt[:7]  # just YYYY-MM
 fout = os.getenv('MTM', os.getcwd()) + "/mtm-" + dtdir + '.log'
 
-LASTS = 20  # lines to show by 'last' command
+LASTS = 25  # lines to show by 'last' command
 
 # categories and keywords
 grocc = {
