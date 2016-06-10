@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-# test my graphs
+# test my graphs 1.1
 # OK, it works
+# http://ggplot.yhathq.com/
 
 from ggplot import *
 
