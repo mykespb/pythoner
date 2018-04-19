@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# myke mk-sorter.py 2015-11-13 1.3
+# myke mk-sorter.py 2015-11-19 1.4
 # 2018-04-13 added quick sort, slow version
 # classic selection, bubble, quick sorts
 
@@ -50,9 +50,23 @@ def quicksort (a):
 # 2. not too fast :) due to making additional lists recursively
 
 # -----------------------------------------------
+
+def bubblesort (a):
+    """ another bubbler"""
+
+    for i in range(len(a)-1):
+        for j in range(i+1, len(a)):
+            if a[i]>a[j]:
+                s = a[j]
+                a[i+1:j+1] = a[i:j]
+                a[i] = s
+    return a
+
+# -----------------------------------------------
 #qs = bubsort
 #qs = selsort
-qs =  quicksort
+#qs =  quicksort
+qs =  bubblesort
 
 # -----------------------------------------------
 def main ():
