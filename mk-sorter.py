@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
 # myke mk-sorter.py 2015-11-19 1.4
 # 2018-04-13 added quick sort, slow version
+# 2018-04-24 added timings
 # classic selection, bubble, quick sorts
 
 import random
+from datetime import datetime
 
 TIMES = 10
 SIZE  = 10
@@ -72,10 +74,16 @@ qs =  bubblesort
 def main ():
     """ dispatcher: tests make and sort """
 
+    total_before = datetime.now()
+
     for i in range(TIMES):
         sa = [random.randint(-RANGE, RANGE) for e in range(SIZE)]
         print (sa, end=" -> ")
         print (qs (sa))
+
+    total_after = datetime.now()
+    total_elapsed = total_after - total_before
+    print ("Total time elapsed: {}" .format (total_elapsed))
 
 main()
 
