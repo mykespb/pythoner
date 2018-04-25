@@ -12,6 +12,7 @@ def main():
             "Foo" if n%3 == 0 else
             "Bar" if n%5 == 0 else n
             , ", ",
+            sep = "",
             end="\n" if n%10 == 0 else "")
 
     return 0
