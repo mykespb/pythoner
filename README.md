@@ -43,3 +43,5 @@ queens2.py 8 queens, alien version 2
 
 mk-max2d.py find max submatrix, w/o optimization
 
+mk-dbook.py my daybook formatter
+
