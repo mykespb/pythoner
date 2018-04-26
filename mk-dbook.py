@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 # mk-dbook.py (C) Mikhail Kolodin, 2018
-# 1.1 2018-02-21 2018-02-27
+# 1.2 2018-02-21 2018-04-26
 
 # create daybook file with given [month [year]]
 # with current date as default
 
 import sys, datetime, os.path, calendar
 
-ver = "1.1 of 2018-02-27"
+ver = "1.2 of 2018-04-26"
 
 today = datetime.date.today()
 year = today.year
@@ -34,7 +34,6 @@ def error():
 def make (year, month):
     print (f"called with year={year}, month={month}")
     days = 31, (29 if calendar.isleap(year) else 28), 31, 30, 31, 30, 31, 31, 30, 31, 30, 31
-#    print ("leap:", 29 if calendar.isleap(year) else 28)
     if year < 2000 or year > today.year or month < 1 or month > 12:
         error()
         return
@@ -49,7 +48,6 @@ def make (year, month):
         fout.write ("Дневник за %s %d\n" % (names[month-1], year))
 
         for day in range(1, days[month-1]+1):
-#            print  (year, month, day)
             wd = calendar.weekday (year, month, day)
             wdp = wdps[wd+1]
             fout.write (f"\n---------------------------------------------------------------------\n{year:04d}-{month:02d}-{day:02d} {wdp}\n---------------------------------------------------------------------\n\n")
