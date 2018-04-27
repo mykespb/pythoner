@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 #
-#  mk-trees-01.py 2018-04-27 0.1
+#  mk-trees-01.py 2018-04-27 0.2
 #  Mikhail Kolodin, 2018-04
 #  tests for trees etc
 
@@ -31,14 +31,12 @@ class Tree1:
             if self.left:
                 self.left.add(val)
             else:
-                nova = Tree1(val)
-                self.left = nova
+                self.left = Tree1(val)
         elif val > self.val:
             if self.right:
                 self.right.add(val)
             else:
-                nova = Tree1(val)
-                self.right = nova
+                self.right = Tree1(val)
 
     def print(self):
         """ordered output"""
