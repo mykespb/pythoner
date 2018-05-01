@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # Mikhail (myke) Kolodin
-# testign redis and redis-queue (rq)
+# testing redis and redis-queue (rq)
 # from http://python-rq.org/ etc
 # 2016-02-04 2016-02-05 1.3
 
@@ -18,7 +18,7 @@ print (x)
 
 q = Queue(connection=Redis())
 
-from my_module import count_words_at_url
+from rq_my_module import count_words_at_url
 result = q.enqueue (count_words_at_url, 'http://nvie.com')
 
 
