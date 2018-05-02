@@ -1,17 +1,18 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 # mk-iters.py 2015-03-11 M.Kolodin
+# convert to py3 2018-05-02
 
-import itertools, pprint
+import itertools, pprint, functools
 
 SIZE = 6
 
-l = [list(itertools.combinations(range(1, SIZE+1), n)) for n in xrange(1, SIZE+1)]
-#pprint.pprint (l)
+l = [list(itertools.combinations(range(1, SIZE+1), n)) for n in range(1, SIZE+1)]
+pprint.pprint (l)
 
 #lm = lambda ll: sum(ll, [])
 #lm = lambda ll: [el for l in ll for el in l]
-lm = lambda s: reduce(lambda d,el: d.extend(el) or d, s, [])
+lm = lambda s: functools.reduce(lambda d,el: d.extend(el) or d, s, [])
 pprint.pprint(lm(l))
 
 #~ [[(1,), (2,), (3,), (4,), (5,), (6,)],
