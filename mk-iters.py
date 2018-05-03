@@ -4,6 +4,7 @@
 # convert to py3 2018-05-02
 
 import itertools, pprint, functools
+# note that itertools now do not have reduce, it is moved to functools
 
 SIZE = 6
 
