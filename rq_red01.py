@@ -2,7 +2,7 @@
 # Mikhail (myke) Kolodin
 # testing redis and redis-queue (rq)
 # from http://python-rq.org/ etc
-# 2016-02-04 2016-02-05 1.3
+# 2016-02-04 2018-05-05 1.4
 
 import redis
 import requests
@@ -20,6 +20,7 @@ q = Queue(connection=Redis())
 
 from rq_my_module import count_words_at_url
 result = q.enqueue (count_words_at_url, 'http://nvie.com')
+print (result)
 
 
 # my_module.py is:
