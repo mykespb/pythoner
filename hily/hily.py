@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# hily 2018-05-06 M.Kolodin 2018-05-06 0.5
+# hily 2018-05-06 M.Kolodin 2018-05-07 0.6
 # Highly Likely Project
 
-# ver. 0.5. it must scan folders in hily.ini and print result (same files) into file hily.out.
+# ver. 0.6. it must scan folders in hily.ini and print result (same files) into file hily.out.
 
 # note: PEP8 change: function names are separated from parameters lists even when they are empty; it is a tets to se if it works better than traditional spacing.
 
@@ -23,7 +23,11 @@ outfile = "./outfile.txt"
 # ------------------------------------ start
 
 def good_config ():
-    """read configuration and cry if none or wrong"""
+    """read configuration and cry if none or wrong.
+
+    TODO: convert given file paths to absolute ones.
+    TODO: split full 2nd subline to data.
+    """
 
     global flist, outfile
 
@@ -33,8 +37,8 @@ def good_config ():
         with open (CONFIG) as config:
             for line in config:
                 line = line.strip ()
-                print (line)
                 if len (line):
+                    print (line)
                     cmd, data = line.split ()
                     if cmd == "in":
                         flist += [data]
