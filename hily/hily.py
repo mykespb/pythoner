@@ -3,7 +3,9 @@
 # hily 2018-05-06 M.Kolodin
 # Highly Likely Project
 
-# ver. 0.2. it must scan folders in hily.iin and print result (same files) into file hily.out.
+# ver. 0.3. it must scan folders in hily.iin and print result (same files) into file hily.out.
+
+# note: PEP8 change: function names are separated from parameters lists even when they are empty; it is a tets to se if it works better than traditional spacing.
 
 import sqlite3
 import os.path
@@ -27,13 +29,13 @@ def start():
 
     print ("Looking for configuration file.")
 
-    if os.path.exists(CONFIG):
+    if os.path.exists (CONFIG):
         with open (CONFIG) as config:
             for line in config:
-                line = line.strip()
+                line = line.strip ()
                 print (line)
-                if len(line):
-                    cmd, data = line.split()
+                if len (line):
+                    cmd, data = line.split ()
                     if cmd == "in":
                         flist += [data]
                     elif cmd == "out":
@@ -69,14 +71,14 @@ def print_result():
 def main():
     """starter"""
     print ("This is HiLy project: Highly Likely folders scanner.\n")
-    if start():
-        init_db()
-        scan_folders()
-        print_result()
+    if start ():
+        init_db ()
+        scan_folders ()
+        print_result ()
 
 # ------------------------------------ init
 
 if __name__ == "__main__":
-    main()
+    main ()
 
 # ------------------------------------ the end.
