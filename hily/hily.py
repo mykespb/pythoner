@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# hily 2018-05-06 M.Kolodin
+# hily 2018-05-06 M.Kolodin 2018-05-06 0.5
 # Highly Likely Project
 
-# ver. 0.4. it must scan folders in hily.iin and print result (same files) into file hily.out.
+# ver. 0.5. it must scan folders in hily.ini and print result (same files) into file hily.out.
 
 # note: PEP8 change: function names are separated from parameters lists even when they are empty; it is a tets to se if it works better than traditional spacing.
 
@@ -41,8 +41,14 @@ def good_config ():
                     elif cmd == "out":
                         outfile = data
         print (f"\nFolders list is {flist},\nresult will be written to {outfile}.")
+
+        if not flist:
+            print ("Folders list is empty. No work is possible. Quitting.")
+            return False
+
     else:
         print (f"Config file {CONFIG} does not exist. Quitting.")
+        return False
 
     return True
 
