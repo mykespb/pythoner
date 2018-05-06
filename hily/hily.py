@@ -1,11 +1,9 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# hily 2018-05-06 M.Kolodin 2018-05-07 0.7
+# hily 2018-05-06 M.Kolodin 2018-05-07 0.10
 # Highly Likely Project
 
-# ver. 0.7. it must scan folders in hily.ini and print result (same files) into file hily.out.
-
-# note: PEP8 change: function names are separated from parameters lists even when they are empty; it is a tets to se if it works better than traditional spacing.
+# ver. 0.10. it must scan folders in hily.ini and print result (same files) into file hily.out.
 
 import sqlite3
 import os.path
@@ -23,10 +21,7 @@ outfile = "./outfile.txt"
 # ------------------------------------ start
 
 def good_config ():
-    """read configuration and cry if none or wrong.
-
-    TODO: convert given file paths to absolute ones.
-    """
+    """read configuration and cry if none or wrong."""
 
     global flist, outfile
 
@@ -40,9 +35,10 @@ def good_config ():
                     print (line)
                     cmd, data = line.split (maxsplit=1)
                     if cmd == "in":
-                        flist += [data]
+                        extdata = os.path.abspath (data)
+                        flist += [extdata]
                     elif cmd == "out":
-                        outfile = data
+                        outfile = os.path.abspath (data)
         print (f"\nFolders list is {flist},\nresult will be written to {outfile}.")
 
         if not flist:
@@ -91,3 +87,7 @@ if __name__ == "__main__":
     main ()
 
 # ------------------------------------ the end.
+
+# NOTES:
+
+# note: PEP8 change: function names are space separated from parameters lists even when they are empty; it is a test to see if it works better than traditional spacing.
