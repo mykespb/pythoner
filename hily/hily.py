@@ -1,11 +1,14 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# hily 2018-05-06 M.Kolodin 2018-05-07 0.10
+# hily 2018-05-06 M.Kolodin 2018-05-08 0.11
 # Highly Likely Project
 
-# ver. 0.10. it must scan folders in hily.ini and print result (same files) into file hily.out.
+# ver. 0.11. it must scan folders in hily.ini and print result (same files) into file hily.out.
 
-import sqlite3
+# 1st ver. will work with sorted list of tiples
+# 2nd ver. will use databases
+#import sqlite3
+
 import os.path
 
 # ------------------------------------ config
