@@ -9,7 +9,11 @@
 # 2nd ver. will use databases
 #import sqlite3
 
+# classic files access library
 import os.path
+
+# aux aim is to study modern library
+from pathlib import Path
 
 # ------------------------------------ config
 # file with config
@@ -67,14 +71,45 @@ def init_db ():
 def scan_folders ():
     """make main job: scan multiple folders recursively"""
     for folder in flist:
-        print (f"scanning {folder}")
+        print (f"\nscanning {folder}")
+        p = Path(folder)
+#        print (f"path = {p}", end=" - ")
+        proc_obj (p)
 
+# ------------------------------------ proc_obj
+
+def proc_obj (p):
+    """process any object"""
+    if p.exists ():
+        print (f"{p} exists")
+        if p.samefile (".") or p.samefile (".."):
+            return
+        if p.is_dir ():
+            proc_folder (p)
+        else:
+            proc_file (p)
+    else:
+        print ("not esists")
+
+# ------------------------------------ proc_folder
+
+def proc_folder (p):
+    """process folder"""
+    print (f"{p} is folder")
+    for child in p.iterdir ():
+        proc_obj (child)
+
+# ------------------------------------ proc_file
+
+def proc_file (p):
+    """process simple file"""
+    print (f"{p} is simple file")
 
 # ------------------------------------ print_result
 
 def print_result ():
     """print result from renewed database in pleasant way"""
-    print ("OK.")
+    print ("\nOK.")
 
 # ------------------------------------ main
 
