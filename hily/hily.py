@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# hily 2018-05-06 M.Kolodin 2018-05-08 0.11
+# hily 2018-05-06 M.Kolodin 2018-05-09 0.12
 # Highly Likely Project
 
-# ver. 0.11. it must scan folders in hily.ini and print result (same files) into file hily.out.
+# ver. 0. it must scan folders in hily.ini and print result (same files) into file hily.out.
 
 # 1st ver. will work with sorted list of tiples
 # 2nd ver. will use databases
@@ -66,7 +66,9 @@ def init_db ():
 
 def scan_folders ():
     """make main job: scan multiple folders recursively"""
-    pass
+    for folder in flist:
+        print (f"scanning {folder}")
+
 
 # ------------------------------------ print_result
 
@@ -80,7 +82,7 @@ def main ():
     """starter"""
     print ("This is HiLy project: Highly Likely folders scanner.\n")
     if good_config ():
-        init_db ()
+#        init_db ()
         scan_folders ()
         print_result ()
 
