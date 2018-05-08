@@ -25,6 +25,9 @@ flist = []
 # outfile with pretty printed result, with default value
 outfile = "./outfile.txt"
 
+# result list with all info about files and foders
+res = []
+
 # ------------------------------------ start
 
 def good_config ():
@@ -96,6 +99,7 @@ def proc_obj (p):
 def proc_folder (p):
     """process folder"""
     print (f"{p} is folder")
+    add ('folder', p)
     for child in p.iterdir ():
         proc_obj (child)
 
@@ -104,6 +108,13 @@ def proc_folder (p):
 def proc_file (p):
     """process simple file"""
     print (f"{p} is simple file")
+    add ('file', p)
+
+# ------------------------------------ add
+
+def add (tipa, p):
+    """add object to list or db"""
+    print (f"adding {p} as {tipa}")
 
 # ------------------------------------ print_result
 
