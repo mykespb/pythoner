@@ -9,6 +9,9 @@
 # 2nd ver. will use databases
 #import sqlite3
 
+# make pretty result
+from pprint import pprint
+
 # classic files access library
 import os.path
 
@@ -99,7 +102,7 @@ def proc_obj (p):
 def proc_folder (p):
     """process folder"""
     print (f"{p} is folder")
-    add ('folder', p)
+    obj_add ('folder', p)
     for child in p.iterdir ():
         proc_obj (child)
 
@@ -107,19 +110,24 @@ def proc_folder (p):
 
 def proc_file (p):
     """process simple file"""
+    global res
     print (f"{p} is simple file")
-    add ('file', p)
+    obj_add ('file', p)
 
 # ------------------------------------ add
 
-def add (tipa, p):
+def obj_add (tipa, p):
     """add object to list or db"""
+    global res
     print (f"adding {p} as {tipa}")
+    res += [(tipa, p.parent, p.name, p.stat().st_size, p.stat().st_mtime)]
 
 # ------------------------------------ print_result
 
 def print_result ():
     """print result from renewed database in pleasant way"""
+    global res
+    pprint (res)
     print ("\nOK.")
 
 # ------------------------------------ main
