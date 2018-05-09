@@ -126,7 +126,18 @@ def obj_add (tipa, p):
 def print_result ():
     """print result from renewed database in pleasant way"""
     global res
+    res.sort (key=lambda k: (k[0], k[3], k[4]))
     pprint (res)
+
+    print ("\nResults:")
+    was = ("", "", "", 0, 0)
+    for fr in res:
+        if (was[0], was[3], was[4]) == (fr[0], fr[3], fr[4]):
+            w1 = was[1] / was[2]
+            w2 = fr[1] / fr[2]
+            print (f"{was[0]} {w1} equals {fr[0]} {w2}")
+        was = fr
+
     print ("\nOK.")
 
 # ------------------------------------ main
@@ -149,3 +160,4 @@ if __name__ == "__main__":
 # NOTES:
 
 # note: PEP8 change: function names are space separated from parameters lists even when they are empty; it is a test to see if it works better than traditional spacing.
+# nite: do not forget to process 3+ equivalents
