@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# hily 2018-05-06 M.Kolodin 2018-05-09 0.12
+# hily 2018-05-06 M.Kolodin 2018-05-09 0.13
 # Highly Likely Project
 
 # ver. 0. it must scan folders in hily.ini and print result (same files) into file hily.out.
@@ -66,11 +66,11 @@ def good_config ():
 
 # ------------------------------------ init_db
 
-def init_db ():
-    """create database if it does not exists,
-    connect to it and use
-    """
-    pass
+# ~ def init_db ():
+    # ~ """create database if it does not exists,
+    # ~ connect to it and use
+    # ~ """
+    # ~ pass
 
 # ------------------------------------ scan_folders
 
@@ -110,7 +110,6 @@ def proc_folder (p):
 
 def proc_file (p):
     """process simple file"""
-    global res
     print (f"{p} is simple file")
     obj_add ('file', p)
 
