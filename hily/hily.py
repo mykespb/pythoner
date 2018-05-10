@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# hily 2018-05-06 M.Kolodin 2018-05-09 0.13
+# hily 2018-05-06 M.Kolodin 2018-05-10 0.14
 # Highly Likely Project
 
 # ver. 0. it must scan folders in hily.ini and print result (same files) into file hily.out.
@@ -75,7 +75,7 @@ def good_config ():
 # ------------------------------------ scan_folders
 
 def scan_folders ():
-    """make main job: scan multiple folders recursively"""
+    """make main job: scan multiple folders"""
     for folder in flist:
         print (f"\nscanning {folder}")
         p = Path(folder)
