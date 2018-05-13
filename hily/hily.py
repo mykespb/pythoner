@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# hily 2018-05-06 M.Kolodin 2018-05-10 0.14
+# hily 2018-05-06 M.Kolodin 2018-05-13 0.15
 # Highly Likely Project
 
 # ver. 0. it must scan folders in hily.ini and print result (same files) into file hily.out.
@@ -135,7 +135,7 @@ def print_result ():
         if (was[0], was[3], was[4]) == (fr[0], fr[3], fr[4]):
             w1 = was[1] / was[2]
             w2 = fr[1] / fr[2]
-            print (f"{was[0]} {w1} equals {fr[0]} {w2}")
+            print (f"file {was[0]} {w1} equals {fr[0]} {w2}")
         was = fr
 
     print ("\nOK.")
@@ -160,4 +160,4 @@ if __name__ == "__main__":
 # NOTES:
 
 # note: PEP8 change: function names are space separated from parameters lists even when they are empty; it is a test to see if it works better than traditional spacing.
-# nite: do not forget to process 3+ equivalents
+# note: do not forget to process 3+ equivalents
