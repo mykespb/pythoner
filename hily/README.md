@@ -22,4 +22,5 @@ History
 -------------------------
 
 2018-05-06 start, understanding of targets.
+2018-05-14 restructure, coexisting version added.
 
