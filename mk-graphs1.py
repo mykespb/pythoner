@@ -29,7 +29,7 @@ def run1():
 
     global NO_NODES, NO_LINKS
     NO_NODES = 6
-    NO_LINKS = 6
+    NO_LINKS = 5
 #    NO_NODES = random.randint(5, len(alf))
 #    NO_LINKS = random.randint(0, NO_NODES*5)
     walf = alf[:NO_NODES]
@@ -83,9 +83,11 @@ def g1dfs(links, walf, node1, node2):
 
     # make symmetrtic links set, because we have non-directional (non-oriented) graph
     links1 = set()
+#    links0 = links
     for el in links:
         links1.add((el[1], el[0]))
     links |= links1
+ #   print ("debug:\n", links, "\n", links0, "\n", links1)
 
     # print matrix
     print ("\n ", walf)
@@ -105,6 +107,7 @@ def g1dfsWay(links, way, node1, node2):
     """find a way and return it with True,
     or say False
     """
+    print ("debug:", way, node1, node2)
 
     # trivial task
     if node1 == node2:
@@ -122,9 +125,7 @@ def g1dfsWay(links, way, node1, node2):
             ares, away = g1dfsWay(links, way, nextnode[1], node2)
             if ares:
                 return True, away
-            else:
-                way = way[:-1]
-                return False, way
+            way = way[:-1]
 
     return False, way
 
