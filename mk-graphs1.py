@@ -28,10 +28,12 @@ def run1():
     """make group of tests with repr 1"""
 
     global NO_NODES, NO_LINKS
-    NO_NODES = random.randint(5, len(alf))
-    NO_LINKS = random.randint(0, NO_NODES*2)
+    NO_NODES = 6
+    NO_LINKS = 6
+#    NO_NODES = random.randint(5, len(alf))
+#    NO_LINKS = random.randint(0, NO_NODES*5)
     walf = alf[:NO_NODES]
-    print ("nodes=", NO_NODES, ", links=", NO_LINKS, ", alf=", walf)
+    print ("nodes =", NO_NODES, ", links =", NO_LINKS, ", alf =", walf)
 
     g = g1fill(walf)
     res = g1test(g, walf)
@@ -43,15 +45,18 @@ def g1fill(walf):
     return graph
     """
 
-    g = set()
+    links = set()
     for n in range(NO_LINKS):
-        g.add((random.choice(alf), random.choice(alf)))
-    print ("task=", g)
+        node1 = random.choice(walf)
+        node2 = random.choice(walf)
+        if node1 == node2: continue
+        links.add((node1, node2))
+    print ("links =", links)
 
-    return g
+    return links
 
 
-def g1test(g, walf):
+def g1test(links, walf):
     """test sample graph,
     take graph,
     return true/false
@@ -61,23 +66,67 @@ def g1test(g, walf):
     node2 = random.choice(walf)
     print ("looking for path from", node1, "to node", node2)
 
-    res, lth, way = g1dfs(g, walf, node1, node2)
+    res, way = g1dfs(links, walf, node1, node2)
 #    res, lth, way = g1bfs(g, walf)
     if res:
-        print ("way found: length =", lth, ", nodes are", way)
+        print ("way found: length =", len(way)-1, ", nodes are", way)
     else:
         print ("no way found, alas")
 
     return res
 
 
-def g1dfs(g, walf, node1, node2):
+def g1dfs(links, walf, node1, node2):
     """find any way between 2 nodes, by depth first search,
     and return result, length of way, way itself
     """
 
+    # make symmetrtic links set, because we have non-directional (non-oriented) graph
+    links1 = set()
+    for el in links:
+        links1.add((el[1], el[0]))
+    links |= links1
 
-    return False, 0, []
+    # print matrix
+    print ("\n ", walf)
+    for c1 in walf:
+        print (c1, end=" ")
+        for c2 in walf:
+            print ("+" if (c1, c2) in links else "\\" if c1 == c2 else ".", end="")
+        print("", c1)
+    print(" ", walf, "\n")
+
+    # do find a way
+    way = [node1]
+    return g1dfsWay(links, way, node1, node2)
+
+
+def g1dfsWay(links, way, node1, node2):
+    """find a way and return it with True,
+    or say False
+    """
+
+    # trivial task
+    if node1 == node2:
+        return True, way
+
+    # check if we found a way
+    if (node1, node2) in links:
+        way.append(node2)
+        return True, way
+
+    # we try to continue our way
+    for nextnode in links:
+        if nextnode[0] == node1 and nextnode[1] not in way:
+            way.append(nextnode[1])
+            ares, away = g1dfsWay(links, way, nextnode[1], node2)
+            if ares:
+                return True, away
+            else:
+                way = way[:-1]
+                return False, way
+
+    return False, way
 
 
 # ---------------------------------------
