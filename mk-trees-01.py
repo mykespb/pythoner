@@ -5,7 +5,7 @@
 #  Mikhail Kolodin, 2018-04
 #  tests for trees etc
 
-# Just adding old tests and rpoblems for students of Python.
+# Just adding old tests and problems for students of Python.
 
 # ---------------------------
 
