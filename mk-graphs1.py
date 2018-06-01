@@ -4,7 +4,7 @@
 #  mk-graphs1.py
 #  tests with graphs: create a sample graph and parse it in different ways
 #  (C) Mikhail Kolodin, 2018
-#  ver. 2018-06-01 1.5
+#  ver. 2018-06-01 1.7
 
 # graph representation:
 # set of tuple-pairs, { (from, to), ...} -- not directed, not weighted
@@ -21,7 +21,7 @@ DEBUG = True     # print internal info
 NO_TESTS = 9     # used in main function
 NO_LINKS = 10    # recalc in run function
 NO_NODES = 10    # recalc in run function
-MULT_LINKS = 4   # multiplier for #links from #nodes
+MULT_LINKS = 4   # multiplier for #links from #nodes, the less it is the more sparse is matrix
 
 # ---------------------------------------
 # 1. set of tuple-pairs, { (from, to), ...} -- not directed, not weighted
@@ -30,6 +30,7 @@ def run():
     """make group of tests with repr 1"""
 
     global NO_NODES, NO_LINKS
+    res = 0
 
 # test values
 #    NO_NODES = 4
@@ -45,6 +46,8 @@ def run():
     g = fill(walf)
     res = test(g, walf)
     print ("\n*** congratulations ***" if res else "\n*** condolences ***")
+
+    return 1 if res else 0
 
 
 def fill(walf):
@@ -76,20 +79,22 @@ def test(links, walf):
     links = relink(links, walf)
 
     # find way using depth first search
-    res, way = dfs(links, walf, node1, node2)
-    if res:
+    res1, way = dfs(links, walf, node1, node2)
+    if res1:
         print ("way found: length =", len(way)-1, ", nodes are", way)
     else:
         print ("no way found, alas")
 
     # find way using broadth (width) first search
-    res = bfs(links, walf, node1, node2)
-    if res:
+    res2 = bfs(links, walf, node1, node2)
+    if res2:
         print ("way found, hurra :)")
     else:
         print ("no way found, alas :(")
 
-    return res
+    print("\n*** Success! Results are same! ***" if res1 == res2 else "\n*** Failure! Results are diffrerent! ***")
+
+    return res1 == res2
 
 
 def relink(links, walf):
@@ -129,8 +134,7 @@ def dfsWay(links, way, node1, node2):
     """find a way and return it with True,
     or say False
     """
-    if DEBUG:
-        print ("debug:", way, node1, node2)
+    if DEBUG: print ("debug:", way, node1, node2)
 
     # trivial task
     if node1 == node2:
@@ -160,24 +164,21 @@ def bfs(links, walf, node1, node2):
     print ("\n*** solve the task by BFS ***")
 
     # do find a way
-    nexts = [node1]
-    curnode = node1
-    way = []
+    nexts = [node1]        # nodes to vizit
+    prevs = []             # viizited nodes
 
     while nexts:
         curnode = nexts.pop(0)
-        if DEBUG:
-            print("debug current:", curnode)
+        if DEBUG: print("debug current:", curnode)
 
         if curnode == node2:
             return True
 
+        prevs.append(curnode)
         for n in links:
-            if n[0] == curnode and n[1] not in way and n[1] != curnode and n[1] not in nexts:
-                way.append(curnode)
+            if n[0] == curnode and n[1] not in prevs and n[1] != curnode and n[1] not in nexts:
                 nexts.append(n[1])
-                if DEBUG:
-                    print("debug added:", n[1])
+                if DEBUG: print("debug added:", n[1])
 
     return False
 
@@ -187,10 +188,13 @@ def bfs(links, walf, node1, node2):
 def main(args):
     """main dispatcher"""
 
+    corrects = 0    # # of correct runs
     for test in range(NO_TESTS):
         print()
         print(60*"=", "\n\ntest %d" % (test+1,))
-        run()
+        corrects += run()
+
+    print ("\n*** We have", corrects, "correct runs out of", NO_TESTS, "tests, i.e.", int(round(corrects*100/NO_TESTS)), "%.\n")
     return 0
 
 if __name__ == '__main__':
