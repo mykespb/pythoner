@@ -4,10 +4,10 @@
 #  mk-graphs1.py
 #  tests with graphs: create a sample graph and parse it in different ways
 #  (C) Mikhail Kolodin, 2018
-#  ver. 2018-06-01 1.3
+#  ver. 2018-06-01 1.5
 
-# graph representations:
-# 1. set of tuple-pairs, { (from, to), ...} -- not directed, not weighted
+# graph representation:
+# set of tuple-pairs, { (from, to), ...} -- not directed, not weighted
 
 import string
 import random
@@ -18,22 +18,22 @@ alf = string.ascii_uppercase
 # main parameteres of experiments
 
 DEBUG = True     # print internal info
-NO_TESTS = 10    # used in main function
+NO_TESTS = 9     # used in main function
 NO_LINKS = 10    # recalc in run function
 NO_NODES = 10    # recalc in run function
-MULT_LINKS = 3   # multiplier for #links from #nodes
+MULT_LINKS = 4   # multiplier for #links from #nodes
 
 # ---------------------------------------
 # 1. set of tuple-pairs, { (from, to), ...} -- not directed, not weighted
 
-def run1():
+def run():
     """make group of tests with repr 1"""
 
     global NO_NODES, NO_LINKS
 
 # test values
-#    NO_NODES = 6
-#    NO_LINKS = 5
+#    NO_NODES = 4
+#    NO_LINKS = 4
 
 # real life values
     NO_NODES = random.randint(5, len(alf))
@@ -42,12 +42,12 @@ def run1():
     walf = alf[:NO_NODES]
     print ("nodes =", NO_NODES, ", links =", NO_LINKS, ", alf =", walf)
 
-    g = g1fill(walf)
-    res = g1test(g, walf)
+    g = fill(walf)
+    res = test(g, walf)
     print ("congratulations" if res else "condolences")
 
 
-def g1fill(walf):
+def fill(walf):
     """fill sample graph from alphabet walf,
     return graph
     """
@@ -63,7 +63,7 @@ def g1fill(walf):
     return links
 
 
-def g1test(links, walf):
+def test(links, walf):
     """test sample graph,
     take graph,
     return true/false
@@ -73,28 +73,36 @@ def g1test(links, walf):
     node2 = random.choice(walf)
     print ("looking for path from", node1, "to node", node2)
 
-    res, way = g1dfs(links, walf, node1, node2)
-#    res, lth, way = g1bfs(g, walf)
+    # find way using depth first search
+    res, way = dfs(links, walf, node1, node2)
     if res:
         print ("way found: length =", len(way)-1, ", nodes are", way)
     else:
         print ("no way found, alas")
 
+    # find way using broadth (width) first search
+    res = bfs(links, walf, node1, node2)
+    if res:
+        print ("way found, hurra :)")
+    else:
+        print ("no way found, alas :(")
+
     return res
 
 
-def g1dfs(links, walf, node1, node2):
+def dfs(links, walf, node1, node2):
     """find any way between 2 nodes, by depth first search,
-    and return result, length of way, way itself
+    and return bool result, way itself
     """
+
+    print ("\n*** solve the task by DFS ***")
 
     # make symmetrtic links set, because we have non-directional (non-oriented) graph
     links1 = set()
-#    links0 = links
     for el in links:
         links1.add((el[1], el[0]))
     links |= links1
- #   print ("debug:\n", links, "\n", links0, "\n", links1)
+    del links1
 
     # print matrix
     print ("\n ", walf)
@@ -107,10 +115,10 @@ def g1dfs(links, walf, node1, node2):
 
     # do find a way
     way = [node1]
-    return g1dfsWay(links, way, node1, node2)
+    return dfsWay(links, way, node1, node2)
 
 
-def g1dfsWay(links, way, node1, node2):
+def dfsWay(links, way, node1, node2):
     """find a way and return it with True,
     or say False
     """
@@ -130,7 +138,7 @@ def g1dfsWay(links, way, node1, node2):
     for nextnode in links:
         if nextnode[0] == node1 and nextnode[1] not in way:
             way.append(nextnode[1])
-            ares, away = g1dfsWay(links, way, nextnode[1], node2)
+            ares, away = dfsWay(links, way, nextnode[1], node2)
             if ares:
                 return True, away
             way = way[:-1]
@@ -138,10 +146,53 @@ def g1dfsWay(links, way, node1, node2):
     return False, way
 
 
-# ---------------------------------------
+def bfs(links, walf, node1, node2):
+    """find any way between 2 nodes, by broadth (width) first search,
+    and return bool result, without way itself
+    """
 
-# chhose the version to run
-run = run1
+    print ("\n*** solve the task by BFS ***")
+
+    # make symmetrtic links set, because we have non-directional (non-oriented) graph
+    links1 = set()
+    for el in links:
+        links1.add((el[1], el[0]))
+    links |= links1
+    del links1
+
+    # print matrix
+    print ("\n ", walf)
+    for c1 in walf:
+        print (c1, end=" ")
+        for c2 in walf:
+            print ("+" if (c1, c2) in links else "\\" if c1 == c2 else ".", end="")
+        print("", c1)
+    print(" ", walf, "\n")
+
+    # do find a way
+    nexts = [node1]
+    curnode = node1
+    way = []
+
+    while nexts:
+        curnode = nexts.pop(0)
+        if DEBUG:
+            print("debug current:", curnode)
+
+        if curnode == node2:
+            return True
+
+        for n in links:
+            if n[0] == curnode and n[1] not in way and n[1] != curnode and n[1] not in nexts:
+                way.append(curnode)
+                nexts.append(n[1])
+                if DEBUG:
+                    print("debug added:", n[1])
+
+    return False
+
+
+# ---------------------------------------
 
 def main(args):
     """main dispatcher"""
