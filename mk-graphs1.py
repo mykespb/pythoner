@@ -44,7 +44,7 @@ def run():
 
     g = fill(walf)
     res = test(g, walf)
-    print ("congratulations" if res else "condolences")
+    print ("\n*** congratulations ***" if res else "\n*** condolences ***")
 
 
 def fill(walf):
@@ -73,6 +73,8 @@ def test(links, walf):
     node2 = random.choice(walf)
     print ("looking for path from", node1, "to node", node2)
 
+    links = relink(links, walf)
+
     # find way using depth first search
     res, way = dfs(links, walf, node1, node2)
     if res:
@@ -90,12 +92,8 @@ def test(links, walf):
     return res
 
 
-def dfs(links, walf, node1, node2):
-    """find any way between 2 nodes, by depth first search,
-    and return bool result, way itself
-    """
-
-    print ("\n*** solve the task by DFS ***")
+def relink(links, walf):
+    """complete pairs and print matrix"""
 
     # make symmetrtic links set, because we have non-directional (non-oriented) graph
     links1 = set()
@@ -111,7 +109,16 @@ def dfs(links, walf, node1, node2):
         for c2 in walf:
             print ("+" if (c1, c2) in links else "\\" if c1 == c2 else ".", end="")
         print("", c1)
-    print(" ", walf, "\n")
+    print(" ", walf)
+
+    return links
+
+
+def dfs(links, walf, node1, node2):
+    """find any way between 2 nodes, by depth first search,
+    and return bool result, way itself
+    """
+    print ("\n*** solve the task by DFS ***")
 
     # do find a way
     way = [node1]
@@ -150,24 +157,7 @@ def bfs(links, walf, node1, node2):
     """find any way between 2 nodes, by broadth (width) first search,
     and return bool result, without way itself
     """
-
     print ("\n*** solve the task by BFS ***")
-
-    # make symmetrtic links set, because we have non-directional (non-oriented) graph
-    links1 = set()
-    for el in links:
-        links1.add((el[1], el[0]))
-    links |= links1
-    del links1
-
-    # print matrix
-    print ("\n ", walf)
-    for c1 in walf:
-        print (c1, end=" ")
-        for c2 in walf:
-            print ("+" if (c1, c2) in links else "\\" if c1 == c2 else ".", end="")
-        print("", c1)
-    print(" ", walf, "\n")
 
     # do find a way
     nexts = [node1]
