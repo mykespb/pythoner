@@ -4,7 +4,7 @@
 #  mk-graphs1.py
 #  tests with graphs: create a sample graph and parse it in different ways
 #  (C) Mikhail Kolodin, 2018
-#  ver. 2018-06-01 1.2
+#  ver. 2018-06-01 1.3
 
 # graph representations:
 # 1. set of tuple-pairs, { (from, to), ...} -- not directed, not weighted
@@ -17,6 +17,7 @@ alf = string.ascii_uppercase
 
 # main parameteres of experiments
 
+DEBUG = True     # print internal info
 NO_TESTS = 10    # used in main function
 NO_LINKS = 10    # recalc in run function
 NO_NODES = 10    # recalc in run function
@@ -113,7 +114,8 @@ def g1dfsWay(links, way, node1, node2):
     """find a way and return it with True,
     or say False
     """
-    print ("debug:", way, node1, node2)
+    if DEBUG:
+        print ("debug:", way, node1, node2)
 
     # trivial task
     if node1 == node2:
@@ -138,10 +140,16 @@ def g1dfsWay(links, way, node1, node2):
 
 # ---------------------------------------
 
+# chhose the version to run
+run = run1
+
 def main(args):
+    """main dispatcher"""
+
     for test in range(NO_TESTS):
-        print ("\ntest %d" % (test+1,))
-        run1()
+        print()
+        print(60*"=", "\n\ntest %d" % (test+1,))
+        run()
     return 0
 
 if __name__ == '__main__':
