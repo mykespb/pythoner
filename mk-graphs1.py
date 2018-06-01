@@ -4,7 +4,7 @@
 #  mk-graphs1.py
 #  tests with graphs: create a sample graph and parse it in different ways
 #  (C) Mikhail Kolodin, 2018
-#  ver. 2018-05-31 1.1
+#  ver. 2018-06-01 1.2
 
 # graph representations:
 # 1. set of tuple-pairs, { (from, to), ...} -- not directed, not weighted
@@ -29,10 +29,15 @@ def run1():
     """make group of tests with repr 1"""
 
     global NO_NODES, NO_LINKS
+
+# test values
 #    NO_NODES = 6
 #    NO_LINKS = 5
+
+# real life values
     NO_NODES = random.randint(5, len(alf))
-    NO_LINKS = random.randint(0, NO_NODES*3)
+    NO_LINKS = random.randint(0, NO_NODES*MULT_LINKS)
+
     walf = alf[:NO_NODES]
     print ("nodes =", NO_NODES, ", links =", NO_LINKS, ", alf =", walf)
 
