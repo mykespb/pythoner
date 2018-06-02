@@ -61,5 +61,6 @@ if __name__ == '__main__':
     sys.exit(main(sys.argv))
 
 # ~ Notes:
-    # ~ 1. usually we do not mix functions (returning result and producing no side effects and pribts) and procedures (without 1 result, maybe with side effect and often with prints).
-    # ~ here it was done intensionally, we know what we do.
+# ~ 1. usually we do not mix functions (returning result and producing no side effects and pribts) and procedures (without 1 result, maybe with side effect and often with prints).
+# ~ here it was done intensionally, we know what we do.
+# - 2. finally printed subsets are preserved in form of lists (ordered), not sets (unordered), to make easier manual testing.
