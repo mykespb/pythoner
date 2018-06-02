@@ -31,9 +31,10 @@ def solve():
     pass
 
 
-def main():
+def main(args):
     """runner"""
     for test in range(NO_TESTS):
+        print("\n*** test", test, "***\n")
         generate()
         solve()
 
