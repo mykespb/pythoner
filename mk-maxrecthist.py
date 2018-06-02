@@ -28,9 +28,9 @@ def generate():
     global hist, HOR, VERT
     HOR = random.randint(1, MAX_HOR)
     VERT = random.randint(MAX_VERT//2, MAX_VERT)
-    for i in range(VERT):
-        hist = [random.randint(0, VERT) for _ in range(HOR)]
+    hist = [random.randint(0, VERT) for _ in range(HOR)]
     print(hist)
+
 
 def solve():
     """solve task: find max area"""
