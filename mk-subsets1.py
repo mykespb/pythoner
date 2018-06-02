@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 #
 #  mk-subsets1.py
-#  print all subsets of a given ste
+#  print all subsets of a given set
 #  (C) Mikhail Kolodin, 2018
 #  ver. 2018-06-03 1.0
 
@@ -60,3 +60,6 @@ if __name__ == '__main__':
     import sys
     sys.exit(main(sys.argv))
 
+# ~ Notes:
+    # ~ 1. usually we do not mix functions (returning result and producing no side effects and pribts) and procedures (without 1 result, maybe with side effect and often with prints).
+    # ~ here it was done intensionally, we know what we do.
