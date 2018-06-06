@@ -4,7 +4,7 @@
 #  mk-concells.py
 #  find largest area of connected cells in rectangular matrix
 #  (C) Mikhail Kolodin, 2018
-#  ver. 2018-06-05 1.0
+#  ver. 2018-06-06 1.1
 
 import random, pprint
 
@@ -47,8 +47,8 @@ def solve():
 
     for i in range(ROWS):
         for j in range(COLS):
-            if mat[i][j]:
-                size = proc_group(i, j)
+#            if mat[i][j] == 1:
+            size = proc_group(i, j)
 
     if best_size:
         print("\nWe found the best groupi at", best_i, best_j, "of size", best_size)
