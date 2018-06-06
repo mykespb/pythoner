@@ -54,3 +54,8 @@ def main():
 
 if __name__ == "__main__":
     main()
+    
+# variant for solve: 
+# found = set()
+# .. found.add(c)
+
