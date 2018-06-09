@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python2
 # -*- coding: utf-8 -*-
 # mk-rot.py 2016-03-11 2016-03-11 1.1
 # rot cypher, for English & Russian, auto

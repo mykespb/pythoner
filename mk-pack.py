@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python2
 # -*- coding: utf-8 -*-
 # задача о рюкзаке
 # набрать вес ровно fit предметами из списка mass
