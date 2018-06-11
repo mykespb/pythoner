@@ -9,7 +9,7 @@
 #  "Data Structures: Tries"
 #
 #  (C) Mikhail Kolodin, 2018
-#  ver. 2018-06-07 0.2
+#  ver. 2018-06-11 0.3
 
 class Trie:
     """class for Trie"""
@@ -20,32 +20,34 @@ class Trie:
         if data:
             self.add(data)
 
+
     def add(self, data):
         """add word to trie"""
-        if not data: return
+        pass
+        # ~ if not data: return
 
-        c = data[0]
-        data = data[1:]
+        # ~ c = data[0]
+        # ~ data = data[1:]
 
-        if c in self.links:
-            to = self.links[c]
-            if not to and not data:
-                return
-            if not data:
-                self.links[c] = Trie()
-                return
-            if not to:
-                self.links[c] = Trie(data)
-                return
-            to.add(data)
-            return
-        else:
-            if data:
-                self.links[c] = Trie(data)
-                return
-            else:
-                self.links[c] = {}
-                return
+        # ~ if c in self.links:
+            # ~ to = self.links[c]
+            # ~ if not to and not data:
+                # ~ return
+            # ~ if not data:
+                # ~ self.links[c] = Trie()
+                # ~ return
+            # ~ if not to:
+                # ~ self.links[c] = Trie(data)
+                # ~ return
+            # ~ to.add(data)
+            # ~ return
+        # ~ else:
+            # ~ if data:
+                # ~ self.links[c] = Trie(data)
+                # ~ return
+            # ~ else:
+                # ~ self.links[c] = {}
+                # ~ return
 
 
     def has(self, data):
@@ -53,12 +55,18 @@ class Trie:
         #TODO
         pass
 
+
+    def delete(self, value):
+        pass
+
+
     def __str__(self):
         """printable show"""
         if not self.links:
             return '()'
         out = '(' + self.allstrings() + ')'
         return out
+
 
     def allstrings(self):
         """give all strings, separated by commas"""
