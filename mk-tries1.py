@@ -9,7 +9,7 @@
 #  "Data Structures: Tries"
 #
 #  (C) Mikhail Kolodin, 2018
-#  ver. 2018-06-11 0.3
+#  ver. 2018-06-13 0.4
 
 class Trie:
     """class for Trie"""
@@ -23,31 +23,33 @@ class Trie:
 
     def add(self, data):
         """add word to trie"""
-        pass
-        # ~ if not data: return
 
-        # ~ c = data[0]
-        # ~ data = data[1:]
+        if not data: return
 
-        # ~ if c in self.links:
-            # ~ to = self.links[c]
-            # ~ if not to and not data:
-                # ~ return
-            # ~ if not data:
-                # ~ self.links[c] = Trie()
-                # ~ return
-            # ~ if not to:
-                # ~ self.links[c] = Trie(data)
-                # ~ return
-            # ~ to.add(data)
+        cch = data[0]
+        cdata = data[1:]
+        cnode = self
+
+        if len(cdata) == 0:
+
+            if cch in cnode.links:
+                if '' not in cnode.links[cch].links:
+                    cnode.links[cch].links[''] = None
+                return
+            else:
+                cnode.links[cch] = Trie()
+                return
+
+        else:
+
+            while cch in self.links:
+                cnode = cnode.links[cch]
+                cch = cdata[0]
+                cdata = cdata[1:]
+
+            nnode = Trie(cdata)
+            cnode.links[cch] = nnode
             # ~ return
-        # ~ else:
-            # ~ if data:
-                # ~ self.links[c] = Trie(data)
-                # ~ return
-            # ~ else:
-                # ~ self.links[c] = {}
-                # ~ return
 
 
     def has(self, data):
@@ -57,7 +59,13 @@ class Trie:
 
 
     def delete(self, value):
+        """delete word"""
         pass
+
+
+    def __repr__(self):
+        """internal repr"""
+        return self.links
 
 
     def __str__(self):
@@ -95,7 +103,7 @@ def main(args):
     print(t)
     t.add("TAR")
     print(t)
-    t.add("TARK")
+    t.add("TARAN")
     print(t)
     t.add("TOOLS")
     print(t)
@@ -104,6 +112,8 @@ def main(args):
     t.add("CAT")
     print(t)
     t.add("AN")
+    print(t)
+    t.add("ANNA")
     print(t)
 
     return 0
