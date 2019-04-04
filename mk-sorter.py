@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
-# myke mk-sorter.py 2015-11-19 1.4
+# myke mk-sorter.py 2015-11-19 1.5
 # 2018-04-13 added quick sort, slow version
 # 2018-04-24 added timings
+# 2019-04-04 funny sort newmin
 # classic selection, bubble, quick sorts
 
 import random
@@ -65,10 +66,24 @@ def bubblesort (a):
     return a
 
 # -----------------------------------------------
+
+def newmin (a):
+    """ new list and min function"""
+
+    b = []
+    c = a[:]
+    while c:
+        e = min(c)
+        c.remove(e)
+        b += [e]
+    return b
+
+# -----------------------------------------------
 #qs = bubsort
 #qs = selsort
 #qs =  quicksort
-qs =  bubblesort
+#qs =  bubblesort
+qs = newmin
 
 # -----------------------------------------------
 def main ():
