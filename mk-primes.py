@@ -1,18 +1,18 @@
 #!/usr/bin/env python3
 # Mikhail Kolodin
 # primes
-# 2019-04-05 1.0
+# 2019-04-05 1.1
 
 def primes (lim=100):
     """ show primes up to lim """
     found = []
-    for i in range (2, lim+1):
-        for j in found:
-            if i % j == 0:
+    for tested in range (2, lim+1):
+        for tester in found:
+            if tested % tester == 0:
                 break
         else:
-            found.append(i)
-            print (i, end=" ")
+            found.append(tested)
+            print (tested, end=" ")
 
 primes(1000)
 
