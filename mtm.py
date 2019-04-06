@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 # mtm = myke's 'time manager
-# 2016-05-08 1.44
+# 2016-05-08 1.45
 
 # use:
 # mkm <cmd> params
@@ -38,7 +38,7 @@ grocc = {
     "info":       "? help query" .split()
 }
 
-cutup   = "busy active hime arts".split()
+cutup   = "busy active home arts".split()
 cutdown = "rest exter".split()
 
 occs = []
