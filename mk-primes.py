@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # Mikhail Kolodin
 # primes
-# 2019-04-05 1.1
+# 2019-04-05 1.2
 
 def primes (lim=100):
     """ show primes up to lim """
@@ -11,7 +11,7 @@ def primes (lim=100):
             if tested % tester == 0:
                 break
         else:
-            found.append(tested)
+            found.append (tested)
             print (tested, end=" ")
 
 primes(1000)
