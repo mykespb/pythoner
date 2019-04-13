@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 #
 # evenfibo.py  myke 2014-06-26 2016-02-03 2.1
-# calucate sum of even fido numbers < 1.000.000
+# calucate sum of even fibo numbers < 1.000.000
 # from yandex prog school
 # http://tech.yandex.ru/education/prog/school/
 
