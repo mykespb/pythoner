@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 # testing ULID
 # https://github.com/ahawker/ulid  -- Universally Unique Lexicographically Sortable Identifier (ULID) in Python 3
