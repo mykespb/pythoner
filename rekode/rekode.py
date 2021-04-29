@@ -20,17 +20,31 @@ import sys, getopt
 def main(argv):
 
     try:
-        opts, args = getopt.getopt (argv, 'hf:t:n:x:u:a',
-            ["from=" "to=", "name=", "ext=", "unlist=", "help"])
+        opts, args = getopt.getopt (argv, 'hf:t:n:x:u:ad',
+            ["from=" "to=", "name=", "ext=", "unlist=", "help", "default"])
     except:
-        print('erros, check params')
+        print('errors, check params')
         sys.exit(1)
+
+    fromenc  = 'cp1251'
+    toenc = 'utf8'
+    exts   = {'txt', 'bbs', 'ion'}
+    flist = set()
 
     for opt, agr in opts:
 
         if opt in ('-h', '--help'):
             print("""
-            Good program to recode it all
+            Good program to recode it all.
+            -h --help    help
+            -f --from    from encoding ...
+            -t --to      to encoding ...
+            -a --all     all files
+            -x --ext     add extension ... to list
+            -u --unlist  unlist extension ...
+            -n --name    add file ...
+            -r --remove  remove file ... from list
+            -d --default run in default mode
             """)
             sys.exit(0)
 
@@ -47,12 +61,15 @@ def main(argv):
             print("convert all files")
 
         elif opt in ('x', '--ext'):
-            print(f"convert extension {arg}")
+            print(f"do convert extension {arg}")
+
+        elif opt in ('u', '--unlist'):
+            print(f"do not convert extension {arg}")
 
         else:
             print("whatever else...")
 
-    print("here we process something...")
+    print(f"here we process something as {fromenc=}, {toenc=}, {exts=}, {flist=}")
 
 if __name__ == "__main__":
     main(sys.argv[1:])
