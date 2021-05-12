@@ -5,6 +5,8 @@
 #  (C) Mikhail Kolodin, 2021
 #  ver. 2021-05-12 1.1
 
+# docs: https://pillow.readthedocs.io/en/stable/handbook/index.html
+
 from PIL import Image, ImageDraw
 
 # common settings
