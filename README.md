@@ -60,3 +60,8 @@ mk-max2d.py find max submatrix, w/o optimization
 mk-dbook.py my daybook formatter
 
 uild1.py tests with ULID identifies and even better output of  obtained values
+
+pygamer
+изучение движка pygame
+на примере игры "Жизнь"
+
