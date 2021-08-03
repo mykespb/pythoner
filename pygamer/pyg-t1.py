@@ -9,6 +9,18 @@ from pygame.locals import *
 # print(f)
 
 pygame.init()
-game_display = pygame.display.set_mode((800, 600))
+display_width = 800
+display_height = 600
+game_display = pygame.display.set_mode((display_width, display_height))
 
+pygame.display.update()
 
+#while True:
+  #for event in pygame.event.get():
+    #print(event)
+
+while True:
+  for event in pygame.event.get():
+    if event.type == QUIT:
+      pygame.quit()
+quit()
