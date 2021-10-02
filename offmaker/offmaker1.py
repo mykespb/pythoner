@@ -1,7 +1,7 @@
 #!python
 
 # (C) Mihail Kolodin, 2021
-# offmaker.py 2021-10-03 2021-10-03 0.1
+# offmaker.py 2021-10-03 2021-10-03 0.2
 
 # обработка вордовых шаблонов и эксельных списков
 # с получением вордовых писем в отдельных файлах
@@ -27,6 +27,8 @@ for item in sheet.iter_cols(0, smc):
     cols.append(item[0].value)
 print(cols)
 
+data = {}
+
 for i, row in enumerate (sheet.iter_rows (values_only = True)):
     if i == 0:
         continue
@@ -34,10 +36,20 @@ for i, row in enumerate (sheet.iter_rows (values_only = True)):
     print ("-------------------------------\nline {}" .format(i))
     for j in range(smc):
         print ("data {} is {}" .format(cols[j], row[j]))
+        data[cols[j]] = row[j]
+
+print("\n-------------------------------\ndata:")
+print(data)
+
+print ("\nwork with template in docx file\n")
 
 doc = Document(template)
 
-print (doc.paragraphs)
+# ~ print (doc.paragraphs)s
+
+for para in doc.paragraphs:
+    print (para.text)
+
 
 # useful links:
 
