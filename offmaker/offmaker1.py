@@ -1,14 +1,14 @@
 #!python
 
 # (C) Mihail Kolodin, 2021
-# offmaker.py 2021-10-03 2021-10-03 0.2
+# offmaker.py 2021-10-03 2021-10-03 1.2
 
 # обработка вордовых шаблонов и эксельных списков
 # с получением вордовых писем в отдельных файлах
 
-# ~ import xlrd
+import os
 import openpyxl
-from docx import Document
+import docx
 
 template  = "template.docx"
 lopersons = "lopersons.xlsx"
@@ -16,6 +16,11 @@ outdir    = "outdir"
 
 print ("here we start with {} as template and {} as list of persons\nresult files will be written to {} directory".format
     (template, lopersons, outdir))
+
+try:
+    os.mkdir (outdir)
+except:
+    pass
 
 wb = openpyxl.load_workbook (lopersons)
 sheet = wb.active
@@ -29,30 +34,39 @@ print(cols)
 
 data = {}
 
+doc = docx.Document(template)
+
+print("было:")
+for para in doc.paragraphs:
+    txt = para.text
+    print (txt)
+
 for i, row in enumerate (sheet.iter_rows (values_only = True)):
     if i == 0:
         continue
 
-    print ("-------------------------------\nline {}" .format(i))
+    print ("-------------------------------\nperson {}" .format(i))
     for j in range(smc):
         print ("data {} is {}" .format(cols[j], row[j]))
         data[cols[j]] = row[j]
     print(data)
 
-#print("\n-------------------------------\ndata:")
+    outname = f"./{outdir}/{i:03d}.docx"
+    # ~ outname = f"{i:03d}.docx"
+    # ~ outdoc = Document
+    print (f"will write to file: {outname}")
 
-print ("\nwork with template in docx file\n")
+    outdoc = docx.Document()
 
-doc = Document(template)
+    print ("стало:")
+    for para in doc.paragraphs:
+        txt = para.text
+        for de in data:
+            txt = txt.replace ("{"+de+"}", str(data[de]))
+        print (txt)
+        doc_para = outdoc.add_paragraph(txt)
 
-for para in doc.paragraphs:
-    txt = (para.text)
-    print ("было:", txt)
-
-
-
-    # ~ print ("Стало:")
-
+    outdoc.save(outname)
 
 # useful links:
 
