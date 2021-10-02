@@ -37,18 +37,21 @@ for i, row in enumerate (sheet.iter_rows (values_only = True)):
     for j in range(smc):
         print ("data {} is {}" .format(cols[j], row[j]))
         data[cols[j]] = row[j]
+    print(data)
 
-print("\n-------------------------------\ndata:")
-print(data)
+#print("\n-------------------------------\ndata:")
 
 print ("\nwork with template in docx file\n")
 
 doc = Document(template)
 
-# ~ print (doc.paragraphs)s
-
 for para in doc.paragraphs:
-    print (para.text)
+    txt = (para.text)
+    print ("было:", txt)
+
+
+
+    # ~ print ("Стало:")
 
 
 # useful links:
