@@ -1,7 +1,7 @@
-#!python
+#!python3
 
-# (C) Mihail Kolodin, 2021
-# offmaker.py 2021-10-03 2021-10-03 1.2
+# (C) Mikhail Kolodin, 2021
+# offmaker.py 2021-10-03 2021-10-09 1.3
 
 # обработка вордовых шаблонов и эксельных списков
 # с получением вордовых писем в отдельных файлах
@@ -52,8 +52,6 @@ for i, row in enumerate (sheet.iter_rows (values_only = True)):
     print(data)
 
     outname = f"./{outdir}/{i:03d}.docx"
-    # ~ outname = f"{i:03d}.docx"
-    # ~ outdoc = Document
     print (f"will write to file: {outname}")
 
     outdoc = docx.Document()
