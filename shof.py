@@ -1,11 +1,11 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
 # shof.py
 # (C) Mikhail (myke) Kolodin, 2021
 # прячем файлы для отправки на работу и обратно
 
-# 2021-12-27 2021-12-27 1.0
+# 2021-12-27 2021-12-27 3.0
 
 # вызов:
 # упаковка:
@@ -44,18 +44,25 @@ exts    = "sh py pl".split()
 
 dt = datetime.datetime.now()
 
+todos = []
 
 def pack():
     """
     упаковка
     """
+    global todos
+    
     print("SHOF: do packing\ndirectory", os.getcwd(), "\nat", dt)
+
+    if os.path.isfile(shof):
+        os.remove(shof)
 
     # список файлов
     files = os.listdir(".")
     print("files:", files)
 
-    todo = []
+    todo  = []
+    todos = []
     for afile in files:
         if os.path.isfile(afile) and afile not in allshof:
             todo.append(afile)
@@ -68,51 +75,110 @@ def pack():
         for ext, proc in packers.items():
             if afile.endswith(ext):
                 proc(afile)
+                break
+        else:
+            todos.append(afile)
 
     # упаковываем в архив и переименовываем
     zf = zipfile.ZipFile(shof, 'w')
-    for afile in todo:
-        zf.write(afile)
+    for afile in todos:
+
+        try:
+            print("adding", afile, "to archive...", end="")
+            zf.write(afile)
+            print("ok.")
+        except:
+            print("failed.")
+
+        # ~ print("removing", afile, end="...")
+        # ~ try:
+            # ~ os.remove(afile)
+            # ~ print("done.")
+        # ~ except:
+            # ~ print("failed.")
+        
     zf.close()
 
     # удаляем исходные файлы
-    print("deleting files:", todo)
-    for afile in todo:
+    allfiles = todos[:]
+    allfiles.extend(todos)
+    allfiles = list(set(allfiles))
+    print("deleting files:", allfiles)
+    for afile in allfiles:
         try:
-            print(afile, end=" ")
+            print("delete:", afile, end=" ")
             os.remove(afile)
-            print("ok")
+            print("ok.")
         except:
-            print("fail")
+            print("failed.")
     
 
 def pack_python(fn):
     """
     упаковка питоновского файла
     """
-    ...
+    global todos
+    
+    of = fn + '.shof'
+
+    with open(fn) as inf, open(of, 'w') as ouf:
+        for line in inf:
+            line = (line
+                .replace("#!", "(SHOF_SHEBANG)")
+                .replace("python", "(SHOF_LANG)")
+                )
+            ouf.write(line)
+
+    os.remove(fn)
+    todos.append(of)
 
 
 def pack_perl(fn):
     """
     упаковка перлового файла
     """
-    ...
+    global todos
+    
+    of = fn + '.shof'
+
+    with open(fn) as inf, open(of, 'w') as ouf:
+        for line in inf:
+            line = (line
+                .replace("#!", "(SHOF_SHEBANG)")
+                .replace("perl", "(SHOF_LANG)")
+                )
+            ouf.write(line)
+
+    os.remove(fn)
+    todos.append(of)
 
 
 def pack_bash(fn):
     """
     упаковка bash файла
     """
-    ...
+    global todos
+    
+    of = fn + '.shof'
+
+    with open(fn) as inf, open(of, 'w') as ouf:
+        for line in inf:
+            line = (line
+                .replace("#!", "(SHOF_SHEBANG)")
+                .replace("bash", "(SHOF_LANG_BASH)")
+                )
+            ouf.write(line)
+
+    os.remove(fn)
+    todos.append(of)
 
 
 def unpack():
     """
     распаковка
     """
-    print("do unpack in", os.getcwd())
-    
+    print("SHOF: do unpacking\ndirectory", os.getcwd(), "\nat", dt)
+
     # распаковываем
     try:
         zf = zipfile.ZipFile(shof, 'r')
@@ -126,29 +192,89 @@ def unpack():
         os.remove(shof)
         print("and removed")
 
+        files = os.listdir(".")
+        print("files:", files)
+
+        todo  = []
+        for afile in files:
+            if os.path.isfile(afile) and afile not in allshof:
+                todo.append(afile)
+
+        print("SHOF: files to process:", todo)
+
+        # по всем известным опасным файлам
+        for afile in todo:
+            try:
+                print("processing:", afile)
+                for ext, proc in unpackers.items():
+                    if afile.endswith(ext):
+                        proc(afile)
+                        break
+            except:
+                print("bad file", afile)
+
     except:
-        print("cannot procerss archive", shof)
+        print("cannot process archive", shof)
 
 
 def unpack_python(fn):
     """
     распаковка питоновского файла
     """
-    ...
+    of = fn[:-5]
+    print("unpacking python file", fn, "to", of)
+
+    with open(fn) as inf, open(of, 'w') as ouf:
+        for line in inf:
+            line = (line
+                .replace("(SHOF_SHEBANG)", "#!")
+                .replace("(SHOF_LANG)", "python")
+                )
+            ouf.write(line)
+
+    print("removing", fn, end="...")
+    os.remove("./" + fn)
+    print("done")
 
 
 def unpack_perl(fn):
     """
     распаковка перлового файла
     """
-    ...
+    of = fn[:-5]
+    print("unpacking perl file", fn, "to", of)
+
+    with open(fn) as inf, open(of, 'w') as ouf:
+        for line in inf:
+            line = (line
+                .replace("(SHOF_SHEBANG)", "#!")
+                .replace("(SHOF_LANG)", "perl")
+                )
+            ouf.write(line)
+
+    print("removing", fn, end="...")
+    os.remove("./" + fn)
+    print("done")
 
 
 def unpack_bash(fn):
     """
     распаковка bash файла
     """
-    ...
+    of = fn[:-5]
+    print("unpacking perl file", fn, "to", of)
+
+    with open(fn) as inf, open(of, 'w') as ouf:
+        for line in inf:
+            line = (line
+                .replace("(SHOF_SHEBANG)", "#!")
+                .replace("(SHOF_LANG_BASH)", "bash")
+                )
+            ouf.write(line)
+
+    print("removing", fn, end="...")
+    os.remove("./" + fn)
+    print("done")
 
 
 def main():
@@ -179,3 +305,7 @@ if __name__ == '__main__':
 
 # ~ ver. 1.0. готово создание архива и распаковка,
 # ~ пока без обработки внутренностей "опасных" файлов
+# ~ ver. 2.0. готово для питоновских и прочих неопасных.
+# ~ ver. 3.0. готово для всех файлов.
+
+# ================================================
