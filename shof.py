@@ -5,7 +5,7 @@
 # (C) Mikhail (myke) Kolodin, 2021
 # прячем файлы для отправки на работу и обратно
 
-# 2021-12-27 2021-12-27 3.0
+# 2021-12-27 2021-12-28 3.2
 
 # вызов:
 # упаковка:
@@ -27,7 +27,7 @@ import os, os.path, datetime, zipfile
 # (((настройки
 
 # текущая версия
-version = '0.1'
+version = '3.2'
 
 # главный пакофайл
 shof    = "shof.shof"
@@ -43,6 +43,12 @@ exts    = "sh py pl".split()
 # )))конец настроек
 
 dt = datetime.datetime.now()
+cwd = os.getcwd()
+sysdir = tuple('bin boot sbin root dev etc srv media mnt opt usr var proc run sys snap timeshift'.split())
+
+if cwd.endswith(sysdir):
+    print("cannot run in bin or system directory!")
+    exit(1)
 
 todos = []
 
@@ -52,7 +58,7 @@ def pack():
     """
     global todos
     
-    print("SHOF: do packing\ndirectory", os.getcwd(), "\nat", dt)
+    print("do packing\ndirectory", os.getcwd(), "\nat", dt)
 
     if os.path.isfile(shof):
         os.remove(shof)
@@ -67,7 +73,7 @@ def pack():
         if os.path.isfile(afile) and afile not in allshof:
             todo.append(afile)
 
-    print("SHOF: files to process:", todo)
+    print("files to process:", todo)
 
     # по всем известным опасным файлам
     for afile in todo:
@@ -177,7 +183,7 @@ def unpack():
     """
     распаковка
     """
-    print("SHOF: do unpacking\ndirectory", os.getcwd(), "\nat", dt)
+    print("do unpacking\ndirectory", os.getcwd(), "\nat", dt)
 
     # распаковываем
     try:
@@ -200,7 +206,7 @@ def unpack():
             if os.path.isfile(afile) and afile not in allshof:
                 todo.append(afile)
 
-        print("SHOF: files to process:", todo)
+        print("files to process:", todo)
 
         # по всем известным опасным файлам
         for afile in todo:
@@ -278,10 +284,12 @@ def unpack_bash(fn):
 
 
 def main():
+    print('This is SHOF {} by myke to facilitate files exchange.' .format(version))
     if os.path.exists(shof):
         unpack()
     else:
         pack()
+    print('SHOF done.')
 
 # конец настроек -- упаковщики и распаковщики
 
