@@ -3,16 +3,20 @@
 
 # icmp1.py
 # (C) Mikhail (myke) Kolodin, 2021
-# 2021-12-31 2021-12-31 0.1
+# 2021-12-31 2022-01-02 1.1
 
 # берём страницу в инете, запоминаем фрагмент,
 # а потом повторными запусками проверяем, изменилась ли страница в указанном месте
 
 import os.path
 import sys
-import lxml
+import requests
+from lxml import html as html
+from collections import namedtuple
 
 fstore = "icmp.tab"
+
+Record = namedtuple("Record", "site pattern value last")
 
 help = """
 This is icmp.py.
@@ -25,47 +29,35 @@ Usage:
         note: only 1st pattern case is processed.
 """
 
+# ~ структура базы
+# ~ site pattern value last
 
-def inbsase(psite, ppattern):
+
+def getdata ():
     """
-    проверить, есть ли уже в базе такая строка.
-    если да, то вернуть значение.
-    если нет, то ''.
+    считать данные в список
     """
+    there = []
+    
     with open(fstore) as store:
         for aline in store:
             line = line.strip()
-            site, pattern, value = line.split()
-            if site == psite and pattern == pattern:
-                return val
-    return ""
+            # ~ site, pattern, value, last = line.split()
+            there.append(Record(line.split()))
+
+    return there
     
 
-def refind(psite, ppattern):
-    """
-    найти строку в инете и сравнить с сохранённой
-    """
-    ...
-
-def store(psite, ppattern):
-    """
-    сохранить строку в базе
-    """
-    ...
-
-if not os.path.isfile("./" + store):
+if not os.path.isfile("./" + fstore):
     with open(fstore, 'w') as store:
-        store.write("site\tpattern\tvalue\n")
+        store.write("#site\tpattern\tvalue\tlast\n")
 
-if len(sys.argv) > 2:
-    site, pattern = sys.argv[1:3]
+path = 'https://linuxmint.com'
+patt = '//div/div/div/h2/text()'
 
-        there = dofind(site, pattern)
-        
-        if inbase(cmd, s):
-            refind(site, pattern)
-        else:
-            store(site, pattern)
-else:
-    print(help)
-    exit(0)
+given = path, patt
+
+resp  = requests.get(path)
+pbody = html.fromstring(resp.text)
+elem  = pbody.xpath(patt)
+print("Linux Mint version =", elem[0])
