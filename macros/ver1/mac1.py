@@ -3,7 +3,7 @@
 
 # mac1.py
 # (C) Mikhail (myke) Kolodin, 2021
-# 2022-01-04 2022-01-04 1.0
+# 2022-01-04 2022-01-04 1.1
 # see description below.
 
 import fileinput
@@ -17,7 +17,7 @@ for aline in fileinput.input(files=files, encoding = "utf-8"):
 
     if line.startswith('$'):
         key, val = line[1:].split('=', 2)
-        macs[key] = val
+        macs[key.strip()] = val.strip()
 
     else:
         for key, val in macs.items():
