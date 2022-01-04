@@ -1,0 +1,10 @@
+hello
+1=2
+$k=nice
+and ${k} is good
+sure
+42
+$travel=swim, walk, march, fly, train
+we go high
+to travel means ${travel} again
+do ${travel}
