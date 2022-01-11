@@ -2,7 +2,7 @@
 
 # predators-1.py.py
 # (C) Mikhail (myke) Kolodin, 2021
-# 2022-01-11 2022-01-11 0.1
+# 2022-01-11 2022-01-11 0.2
 
 # ~ доки: https://docs.python.org/3/library/turtle.html
 
@@ -27,6 +27,9 @@ REPRO    = 10
 PREDBORN = 20
 SURVIVE  = 30
 VICBORN  = 20
+
+DODRAW   = 1    # надо отрисовывать черепашкой, а потом показать таблицу
+DODRAW   = 0    # не надо отрисовывать черепашкой, только всё просчитать и показать таблицу результатов
 
 import random
 import turtle
