@@ -35,8 +35,6 @@ def do1():
         loko, desc, code = place
         folium.Marker(loko, popup=desc, tooltip=code).add_to(mapa)
 
-    # ~ mapa.save(mapafile)
-
 do1()
 
 # ok
