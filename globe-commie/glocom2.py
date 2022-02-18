@@ -1,0 +1,98 @@
+#!/usr/bin/env python
+
+# Mikhail (myke) Kolodin, 2022
+# 2022-02-15 2022-02-18 4.1
+# glocom1.py
+
+# ~ тема: глобальный коммивояжёр
+
+import folium
+from geopy.distance import great_circle
+import pyproj
+
+mapafile = "mapb.html"
+
+places = (
+    ([59.942071,30.2677354], 'спб, дом', "MK"),
+    ([55.8524374,37.4351729], "москва, пт", "PT"),
+    ([54.9769347,60.3778519], "чебаркуль", "CH"),
+    ([54.8893953,83.0902525], "новосибирск, экваторная", "NE"),
+    ([42.2619168,-71.072476], "сша, бостон, маша", "BM"),
+    ([43.8811826,-79.4533959], "канада, ричмонд-хилл", "RH"),
+    # ~ ([], ""),
+    # ~ ([], ""),
+    # ~ ([], ""),
+    # ~ ([], ""),
+    # ~ ([], ""),
+)
+
+mapa = folium.Map(location=places[0][0], zoom_start=8, tiles='Stamen Terrain')
+
+# ok
+def do1():
+    """просто делаем карту и показываем дом"""
+    for place in places:
+        loko, desc, code = place
+        folium.Marker(loko, popup=desc, tooltip=code).add_to(mapa)
+
+    # ~ mapa.save(mapafile)
+
+do1()
+
+# ok
+def dists():
+    """рассчитать расстояния"""
+    for p1 in places:
+        for p2 in places:
+            if p1 == p2:
+                dist = 0
+            else:
+                ll1 = p1[0]
+                ll2 = p2[0]
+                dist = great_circle(ll1, ll2).km
+            print("%10.3f" % dist, end=" ")
+        print()
+
+dists()
+
+     # ~ 0.000    620.777   1848.135   3124.727   6603.888   6831.496 
+   # ~ 620.777      0.000   1426.339   2834.176   7212.999   7450.423 
+  # ~ 1848.135   1426.339      0.000   1462.649   8256.612   8377.258 
+  # ~ 3124.727   2834.176   1462.649      0.000   8938.325   8909.044 
+  # ~ 6603.888   7212.999   8256.612   8938.325      0.000    703.822 
+  # ~ 6831.496   7450.423   8377.258   8909.044    703.822      0.000 
+
+# ~ ok
+def liner1():
+    """отрисовать 1 линию"""
+    p1, p2 = places[:2]
+    ll1 = p1[0]
+    ll2 = p2[0]
+    folium.PolyLine([ll1, ll2], color="red").add_to(mapa)
+
+# ~ liner1()
+
+def fullway(start, finish, step=1000):
+    """найти все нужные промежуточные точки для кривой"""
+    g = pyproj.Geod(ellps='WGS84')
+    startlong, startlat = start
+    endlong, endlat = finish
+    (az12, az21, dist) = g.inv(startlong, startlat, endlong, endlat)
+    lonlats = g.npts(startlong, startlat, endlong, endlat, 1 + int(dist / step))
+    lonlats.insert(0, (startlong, startlat))
+    lonlats.append((endlong, endlat))
+    return lonlats
+
+def liner2():
+    """рассчитать расстояния"""
+    for p1 in places:
+        for p2 in places:
+            if p1 != p2:
+                ll1 = p1[0]
+                ll2 = p2[0]
+                lls = fullway(ll1, ll2)
+                folium.PolyLine(lls, color="red").add_to(mapa)
+
+liner2()
+
+mapa.save(mapafile)
