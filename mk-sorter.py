@@ -79,10 +79,10 @@ def newmin (a):
     return b
 
 # -----------------------------------------------
-#qs = bubsort
-#qs = selsort
-#qs =  quicksort
-#qs =  bubblesort
+# ~ qs = bubsort
+# ~ qs = selsort
+# ~ qs =  quicksort
+# ~ qs =  bubblesort
 qs = newmin
 
 # -----------------------------------------------
