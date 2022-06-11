@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # Mikhail Kolodin
 # primes Eratosphen-1
-# 2022-06-09 2022-06-09 1.0
+# 2022-06-09 2022-06-11 1.1
 
 def erato1(limit=1000):
     """таблица простых чисел, решето Эратосфена, некомпактно"""
@@ -24,6 +24,7 @@ def erato1(limit=1000):
     # ~ global primes
     # ~ nbyte = n // size
     # ~ nbit  = n % size
+    # ~ nbyte, nbit = divmod(n, SIZE)
     # ~ primes[nbyte] |= (1 << nbit)
 
 SIZE = 8
@@ -38,14 +39,16 @@ def init(limit):
 def down(n):
     """сброс бита числа"""
     global primes
-    nbyte = n // SIZE
-    nbit  = n % SIZE
+    # ~ nbyte = n // SIZE
+    # ~ nbit  = n % SIZE
+    nbyte, nbit = divmod(n, SIZE)
     primes[nbyte] &= ~(1 << nbit)
     
 def isup(n):
     """проверка бита числа"""
-    nbyte = n // SIZE
-    nbit  = n % SIZE
+    # ~ nbyte = n // SIZE
+    # ~ nbit  = n % SIZE
+    nbyte, nbit = divmod(n, SIZE)
     return primes[nbyte] & (1 << nbit)
 
 def erato2(limit=1000):
