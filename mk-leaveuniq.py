@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# M.Kolodin mk-leaveuniq.py 2023-0710 2023-07-10 1.1
+# M.Kolodin mk-leaveuniq.py 2023-07-10 2023-07-10 1.1
 
 from random import randint as ri
 
