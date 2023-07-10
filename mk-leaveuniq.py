@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-# M.Kolodin mk-leaveuniq.py 2023-07-10 2023-07-10 1.1
+# M.Kolodin mk-leaveuniq.py 2023-07-10 2023-07-10 1.2
 
 from random import randint as ri
 
@@ -45,14 +45,28 @@ def print_rem(l: list[int]) -> None:
 def test():
     """run 1 test"""
 
+    print(50*'-')
     arr = make_list()
-    # arr = [0, 1, 1, 2]
+    print(arr)
+    print_rem(arr)
+    rev_dupes(arr)
+    print(arr)
+
+def testspec(arr: list[int]) -> None:
+    """run 1 test, special data"""
+
+    print(50*'-')
     print(arr)
     print_rem(arr)
     rev_dupes(arr)
     print(arr)
 
 test()
+
+testspec([])
+testspec([0])
+testspec([0, 0])
+testspec([0, 0, 1, 1, 1, 2 ])
 
 # Задача C. Удаление дубликатов
 
