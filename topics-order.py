@@ -41,7 +41,7 @@ def prepare():
 
     data = []
     for line in topics.strip().lower().split("\n"):
-        data.append(line.split())
+        data.append(line.strip().split())
 
     ppp(data)
 
