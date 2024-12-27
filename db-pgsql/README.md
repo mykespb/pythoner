@@ -1,6 +1,8 @@
 pgtest - py-acc
 ==========================
 
+2020-12-18
+
 Проверка работы python3 c СУБД PostgreSQL
 
 а. запускаем постгрес в docker-compose,
