@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 # Mikhail (myke) Kolodin, 2024
-# 2024-12-28 2024-12-28 0.5
+# 2024-12-28 2024-12-28 0.6
 # topics-order.py
 
 # ~ Дан набор тем, причём указано, какие темы зависят от каких и должны изучаться после них.
@@ -30,7 +30,7 @@ loops generators
 generators networks conclusion
 """
 
-topics = topics2
+topics = topics1
 
 # ~ print(id(topics), id(topics1), id(topics2))
 
@@ -87,7 +87,7 @@ def process():
 
     para = list(set(para))
     
-    ppp("postrocessed data", para, postlen := len(para),
+    ppp("postrocessed data", list(enumerate(para)), postlen := len(para),
         "shortened" if prelen > postlen else "not changed"
         )
 
