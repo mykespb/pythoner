@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 # Mikhail (myke) Kolodin, 2024
-# 2024-12-28 2024-12-28 0.6
+# 2024-12-28 2024-12-28 0.8
 # topics-order.py
 
 # ~ Дан набор тем, причём указано, какие темы зависят от каких и должны изучаться после них.
@@ -54,7 +54,12 @@ def ppp(*what):
     """условная притти-печать (кортеж!)
     """
 
-    if DEBUG: pp(what)
+    if DEBUG: pp(what,
+        indent = 4,
+        underscore_numbers = True,
+        compact = False,
+        width = 80
+        )
     
 
 def prepare():
@@ -87,8 +92,10 @@ def process():
 
     para = list(set(para))
     
-    ppp("postrocessed data", list(enumerate(para)), postlen := len(para),
-        "shortened" if prelen > postlen else "not changed"
+    ppp("postrocessed data",
+        list(enumerate(para)),
+        postlen := len(para),
+        "list shortened" if prelen > postlen else "list not changed"
         )
 
     ...
