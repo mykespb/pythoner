@@ -54,7 +54,8 @@ def ppp(*what):
     """условная притти-печать (кортеж!)
     """
 
-    if DEBUG: pp(what,
+    if DEBUG:
+        pp(what,
         indent = 4,
         underscore_numbers = True,
         compact = False,
@@ -80,7 +81,12 @@ def process():
     """обработка
     """
 
-    global para
+    global para, order, proto, step, data
+
+    if not data:
+        print("No data. Quitting.")
+        return []
+    
     para = []
 
     for line in data:
@@ -98,8 +104,38 @@ def process():
         "list shortened" if prelen > postlen else "list not changed"
         )
 
-    ...
+    proto = []
+    order = []
 
+    step = 0
+
+    enorder(0, para[0][0])
+    enorder(1, para[0][1])
+
+    step = 1
+
+    while 0 < step < len(para):
+        ...
+        break
+        
+    else:
+        print(f"Finish with",
+        "success" if step == 0 else "failure")
+
+    # ~ ppp("proto:", proto)
+    ppp("order:", order)
+
+
+def enorder(pos, what):
+    """вставить элемент в позицию order,
+    записать в лог proto,
+    указать шаг step"""
+
+    order.insert(pos, what)
+    record = ("insert", step, pos, what)
+    proto.append(record)
+    ppp(record)
+    
 
 def output():
     """красивая печать результата
