@@ -1,6 +1,8 @@
 # pythoner
 ## Educational, personal and professional programs in Python
 
+K2026 головоломка с конём
+
 mk-1strecurring.py find 1st repeating character in string
 
 mk-concells.py count max group of neibouring cells in matrix
@@ -54,6 +56,7 @@ mk-sharik.py
 queens1.py 8 queens, alien version 1
 
 queens2.py 8 queens, alien version 2
+queens23.py -- same, forr python3
 
 mk-max2d.py find max submatrix, w/o optimization
 
