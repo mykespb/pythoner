@@ -1,5 +1,6 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
+
+SIZE = 4
 
 def rc_queens(n_col, width, sol):
     global cnt
@@ -18,8 +19,8 @@ def safe_queen(new_row, new_col, sol):
     return True
 
 def main():
-    for n in range(8):
-        rc_queens(1, 8, [n])
+    for n in range(SIZE):
+        rc_queens(1, SIZE, [n])
 
 cnt = 0
 main()
