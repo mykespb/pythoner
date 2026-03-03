@@ -59,3 +59,6 @@ def main():
 assert SIZE > 1
 cnt = 0
 main()
+
+
+# ~ solution 92: [7, 3, 0, 2, 5, 1, 6, 4] -> a8 b4 c1 d3 e6 f2 g7 h5
