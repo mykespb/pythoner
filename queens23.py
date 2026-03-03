@@ -1,12 +1,19 @@
 #!/usr/bin/env python
+# solving queens problem for board of SIZE
 
-SIZE = 4
+SIZE = 9
+
+def psolution(sol):
+    for i, c in enumerate(sol):
+        print("abcdefghijklmnopqrstuvwxyz"[i] + str(c+1), end=" ")
+    print()
 
 def rc_queens(n_col, width, sol):
     global cnt
     if len(sol) == width:
         cnt += 1
-        print("solution %2d:" % cnt, sol)
+        print("solution %2d: " % cnt, sol, end=", ")
+        psolution(sol)
     else:
         for n_row in range(width):
             if safe_queen(n_row, n_col, sol):
@@ -22,5 +29,6 @@ def main():
     for n in range(SIZE):
         rc_queens(1, SIZE, [n])
 
+assert SIZE > 0
 cnt = 0
 main()
