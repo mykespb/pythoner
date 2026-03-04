@@ -5,7 +5,7 @@
 
 from itertools import permutations
 
-SIZE = 8
+SIZE = 4
 
 def psolution():
 

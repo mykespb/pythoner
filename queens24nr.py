@@ -3,7 +3,7 @@
 # queens-24nr.py non-recursive version
 # Mikhail (myke) Kolodin, 2026-03-03, 2.4.1
 
-SIZE = 8
+SIZE = 4
 MAX  = SIZE-1
 
 def psolution(sol):

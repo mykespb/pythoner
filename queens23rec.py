@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # solving queens problem for board of SIZE
 
-SIZE = 9
+SIZE = 4
 
 def psolution(sol):
     for i, c in enumerate(sol):
