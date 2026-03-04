@@ -56,7 +56,9 @@ mk-sharik.py
 queens1.py 8 queens, alien version 1
 
 queens2.py 8 queens, alien version 2
-queens23.py -- same, forr python3
+queens23rec.py -- same, for python3, recursive
+queens24nr.py --  ...non-recursive
+queens26all.py -- count for all
 
 mk-max2d.py find max submatrix, w/o optimization
 
