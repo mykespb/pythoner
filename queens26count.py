@@ -1,9 +1,11 @@
 #!/usr/bin/env python
 # solving queens problem for board of SIZE
 # queens-26count.py non-recursive version
-# Mikhail (myke) Kolodin, 2026-03-03, 2.6.1
+# Mikhail (myke) Kolodin, 2026-03-04, 2.6.2
 
-LIMIT = 10
+import time
+
+LIMIT = 4
 
 def ok():
     """is it good so far?"""
@@ -50,25 +52,30 @@ def main():
     global SIZE, MAX, cnt, b, v
 
     for SIZE in range(1, LIMIT+1):
+        was = time.time()
         print(f"{SIZE=}", end=" -> ")
         MAX  = SIZE-1
         cnt = 0
         run()
-        print(f"{cnt} solution(s)")
+        now = time.time()
+        delta = now - was
+        print(f"{cnt} solution(s), time = {delta:.8f}")
 
 
 main()
 
 
-# ~ SIZE=1 -> 1 solution(s)
-# ~ SIZE=2 -> 0 solution(s)
-# ~ SIZE=3 -> 0 solution(s)
-# ~ SIZE=4 -> 2 solution(s)
-# ~ SIZE=5 -> 10 solution(s)
-# ~ SIZE=6 -> 4 solution(s)
-# ~ SIZE=7 -> 40 solution(s)
-# ~ SIZE=8 -> 92 solution(s)
-# ~ SIZE=9 -> 352 solution(s)
-# ~ SIZE=10 -> 724 solution(s)
-# ~ SIZE=11 -> 2680 solution(s)
-# ~ SIZE=12 -> 14200 solution(s)
+# ~ SIZE=1 -> 1 solution(s), time = 0.00000477
+# ~ SIZE=2 -> 0 solution(s), time = 0.00000715
+# ~ SIZE=3 -> 0 solution(s), time = 0.00000572
+# ~ SIZE=4 -> 2 solution(s), time = 0.00001454
+# ~ SIZE=5 -> 10 solution(s), time = 0.00005174
+# ~ SIZE=6 -> 4 solution(s), time = 0.00024366
+# ~ SIZE=7 -> 40 solution(s), time = 0.00104189
+# ~ SIZE=8 -> 92 solution(s), time = 0.00495005
+# ~ SIZE=9 -> 352 solution(s), time = 0.02443624
+# ~ SIZE=10 -> 724 solution(s), time = 0.12696886
+# ~ SIZE=11 -> 2680 solution(s), time = 0.70354080
+# ~ SIZE=12 -> 14200 solution(s), time = 4.32257199
+# ~ SIZE=13 -> 73712 solution(s), time = 26.63431382
+# ~ SIZE=14 -> 365596 solution(s), time = 177.84346104

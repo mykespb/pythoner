@@ -29,7 +29,7 @@ def main():
     global p, cnt
     cnt = 0
     
-    for p in permutations( range(SIZE), SIZE):
+    for p in permutations(range(SIZE), SIZE):
         if ok():
             cnt += 1
             psolution()
